@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/shortcut_favorite"
+        android:icon="@drawable/ic_shortcut_favorite"
+        app:showAsAction="always"
+        android:title="Favorites" />
+    <item
+        android:id="@+id/shortcut_schedule"
+        android:icon="@drawable/ic_shortcut_schedule"
+        android:layout_weight="20"
+        app:showAsAction="always"
+        android:title="Schedule" />
+    <item
+        android:id="@+id/shortcut_people"
+        android:icon="@drawable/ic_shortcut_people"
+        app:showAsAction="always"
+        android:title="People" />
+    <item
+        android:id="@+id/shortcut_invitation"
+        android:icon="@drawable/ic_shortcut_invite"
+        app:showAsAction="always"
+        android:title="Invitations" />
+    <item
+        android:id="@+id/shortcut_notification"
+        android:icon="@drawable/ic_shortcut_notification"
+        app:showAsAction="always"
+        android:title="Notifications" />
+    
+</menu>
