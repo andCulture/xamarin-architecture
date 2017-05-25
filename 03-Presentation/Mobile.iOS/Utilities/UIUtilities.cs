@@ -1,14 +1,11 @@
 ﻿using CoreGraphics;
 using Foundation;
-using SyncedCare.Mobile.Presentation.iOS.Extensions;
-using System;
-using System.IO;
-using UIKit;
-using SyncedCare.Mobile.Core.ViewLogic;
-using SyncedCare.Mobile.Core.DataAccess;
 using LocalAuthentication;
-using SyncedCare.Mobile.Core.ViewModels.Users;
+using Mobile.iOS.Extensions;
+using Mobile.iOS.Utilities;
+using System;
 using System.Linq;
+using UIKit;
 
 namespace SyncedCare.Mobile.Presentation.iOS.Helpers
 {
@@ -16,39 +13,9 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
     {
         #region Properties
 
-        public static UIImage DefaultAvatar
-        {
-            get
-            {
-                return GetDefaultAvatarImage();
-            }
-        }
-
         #endregion Properties
 
         #region Methods
-
-        /// <summary>
-        /// Gets the avatar image for a care team member.
-        /// </summary>
-        /// <param name="fileName">The avatar image file name.</param>
-        /// <param name="userId">The user id (for decrypting)</param>
-        /// <returns>An avatar image for a care team member.</returns>
-        public static UIImage GetAvatarImage(string fileName, string userId)
-        {
-			if (!string.IsNullOrEmpty(fileName))
-			{
-				var documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-				var imagePath = Path.Combine(documentsDirectory, fileName);
-				if (!string.IsNullOrEmpty(fileName) && File.Exists(imagePath))
-				{
-					var cyptoAlg = SharedViewLogic.GetCyptoAlgorithm(userId);
-					var decryptedBytes = SharedViewLogic.DecryptBytes(cyptoAlg, File.ReadAllBytes(imagePath));
-					return decryptedBytes.ToImage();
-				}
-			}
-            return DefaultAvatar;
-        }
 
         /// <summary>
         /// Pushes the user to the supplied view controller.
@@ -59,7 +26,7 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
         public static void PushToScreen<T>(UIStoryboard storyboard, UINavigationController navigationController)
 		{
 			var typeName = typeof(T).ToString();
-			var controllerName = typeName.Contains(".") ? typeName.Substring(typeName.LastIndexOf(".") + 1) : typeName;
+			var controllerName = typeName.Contains(".") ? typeName.Substring(typeName.LastIndexOf(".", StringComparison.CurrentCulture) + 1) : typeName;
 			var viewController = storyboard.InstantiateViewController(controllerName);
 			Convert.ChangeType(viewController, typeof(T));
 			if (viewController != null)
@@ -83,56 +50,6 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
             var image = UIGraphics.GetImageFromCurrentImageContext();
             UIGraphics.EndImageContext();
             return image;
-        }
-
-        public static UIButton GetPrimaryButton(string text)
-        {
-            var button = UIButton.FromType(UIButtonType.RoundedRect);
-            button.TranslatesAutoresizingMaskIntoConstraints = false;
-            button.SetTitle(text, UIControlState.Normal);
-            button.SetTitleColor(AppColors.WHITE.ToUIColor(), UIControlState.Normal);
-            button.TitleLabel.Font = UIFont.SystemFontOfSize(13.5f, UIFontWeight.Medium);
-            button.BackgroundColor = AppColors.PRIMARY_BLUE.ToUIColor();
-            button.Layer.CornerRadius = 6.0f;
-            // Add the shadow
-            button.Layer.ShadowColor = AppColors.DARKEST_GRAY.ToUIColor().CGColor;
-            button.Layer.ShadowOpacity = 0.25f;
-            button.Layer.ShadowRadius = 2;
-            button.Layer.ShadowOffset = new CGSize(0f, 2f);
-
-            return button;
-        }
-
-		/// <summary>
-		/// Saves an image to disk. The image is encrypted prior to being saved.
-		/// </summary>
-		/// <param name="image">The image to save</param>
-		/// <param name="fileName">File name.</param>
-		/// <param name="userId">User id.</param>
-		/// <param name="onSaveComplete">On save complete action</param>
-		/// <param name="scaleTo">Size to scale to (optional)</param>
-        public static void SaveImage(UIImage image, string fileName, string userId, Action<UIImage, byte[], string> onSaveComplete, CGSize scaleTo)
-        {
-			if (scaleTo != image.Size)
-			{
-				image = image.Scale(scaleTo);
-			}
-            var documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            var imagePath = Path.Combine(documentsDirectory, fileName);
-            NSError err = null;
-			using (NSData imgData = image.AsJPEG())
-			{
-				var imgBytes = new byte[imgData.Length];
-				System.Runtime.InteropServices.Marshal.Copy(imgData.Bytes, imgBytes, 0, Convert.ToInt32(imgData.Length));
-				var encryptionAlg = SharedViewLogic.GetCyptoAlgorithm(userId);
-				var encryptedBytes = SharedViewLogic.EncryptBytes(encryptionAlg, imgBytes);
-				// Save the encrypted image.
-				File.WriteAllBytes(imagePath, encryptedBytes);
-				if (onSaveComplete != null && err == null)
-                {
-                    onSaveComplete(image, imgBytes, imagePath);
-                }
-			}
         }
 
 	     /// <summary>
@@ -200,31 +117,24 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
             }
         }
 
-        /// <summary>
-        /// Gets the default avatar image from file.
-        /// </summary>
-        /// <returns>A UI Image of the avatar.</returns>
-        public static UIImage GetDefaultAvatarImage()
-        {
-            return UIImage.FromFile("Images/Avatar.jpg");
-        }
-
 		/// <summary>
 		/// Adds a gesture recognizer to the view to dismiss the keyboard when editing ends.
 		/// </summary>
 		/// <param name="view">The view to apply the gesture recognizer to.</param>
 		public static void ApplyKeyboardDismissToView(this UIView view, UIView viewToCheck)
 		{
-			var g = new UITapGestureRecognizer(() =>
-			{
-				var firstResponder = GetFirstResponder(viewToCheck);
-				if (firstResponder != null)
-				{
-					firstResponder.ResignFirstResponder();
-				}
-			});
-			g.CancelsTouchesInView = false; //for iOS5
-			view.AddGestureRecognizer(g);
+            var g = new UITapGestureRecognizer(() =>
+            {
+                var firstResponder = GetFirstResponder(viewToCheck);
+                if (firstResponder != null)
+                {
+                    firstResponder.ResignFirstResponder();
+                }
+            })
+            {
+                CancelsTouchesInView = false //for iOS5
+            };
+            view.AddGestureRecognizer(g);
 		}
 
 		/// <summary>
@@ -252,17 +162,6 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
 			return null;
 		}
 
-        public static UIBarButtonItem CreateNavigationBarButton(string buttonText, CGSize buttonSize, EventHandler onTap)
-        {
-            var btn = UIButton.FromType(UIButtonType.Custom);
-            btn.TouchUpInside += onTap;
-            btn.SetTitle(buttonText, UIControlState.Normal);
-            btn.SetTitleColor(AppColors.PRIMARY_BLUE.ToUIColor(), UIControlState.Normal);
-            btn.Frame = new CGRect(0, 0, buttonSize.Width, buttonSize.Height);
-            var tbButton = new UIBarButtonItem(btn);
-            return tbButton;
-        }
-
 		/// <summary>
 		/// Gets the next and previous subviews based on the current index.
 		/// </summary>
@@ -278,72 +177,6 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
 				return new SurroundingSubviews(previous, next);
 			}
 			return null;
-		}
-
-		/// <summary>
-		/// Creates a local notification for daily to-do reminder.
-		/// </summary>
-		/// <param name="date">The date of the reminder.</param>
-		/// <param name="todoCount">The number of to-dos (including missed) for the supplied date.</param>
-		public static void ScheduleTodoNotification(DateTime date, int todoCount)
-		{
-			// Made the scheduled datetime 8:00 AM on the date that was supplied.
-			var scheduleDate = new DateTime(date.Year, date.Month, date.Day, 8, 0, 0);
-			// If today then fire the alert immediately.
-			if (date.Date == SharedViewLogic.Today.ToUniversalTime().Date)
-			{
-				scheduleDate = DateTime.Now;
-			}
-			if (scheduleDate.Date >= SharedViewLogic.Today.ToUniversalTime().Date && todoCount > 0)
-			{
-				var notification = new UILocalNotification() 
-				{ 
-					FireDate = scheduleDate.ToNSDate(),
-					AlertTitle = "To-do Reminder", // required for Apple Watch notifications
-					AlertAction = "To-do Reminder",
-					AlertBody = $"You have {todoCount} to-dos today.",
-					ApplicationIconBadgeNumber = todoCount,
-					SoundName = UILocalNotification.DefaultSoundName
-				};
-
-				UIApplication.SharedApplication.ScheduleLocalNotification(notification);				
-			}
-		}
-
-		/// <summary>
-		/// Cancels all future local notifications
-		/// </summary>
-		public static void CancelFutureNotifications()
-		{
-			if (UIApplication.SharedApplication.ScheduledLocalNotifications != null)
-			{
-				foreach (var n in UIApplication.SharedApplication.ScheduledLocalNotifications)
-				{
-					if (n.FireDate.ToDateTime().Date > SharedViewLogic.Today.Date)
-					{
-						UIApplication.SharedApplication.CancelLocalNotification(n);
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// Updates the secure data in keychain and sets the user's touch id
-		/// preferences in the database.
-		/// </summary>
-		/// <param name="userId">The user's Id</param>
-		/// <param name="usernameValue">The value to set the username as (blank to remove).</param>
-		/// <param name="passwordValue">The value to set the username as (blank to remove).</param>
-		/// <param name="isEnabled">Whether touch id is enabled for the app.</param>
-		/// <returns>If the update was successful.</returns>
-		public static bool UpdateTouchIdSettings(string userId, string usernameValue, string passwordValue, bool isEnabled)
-		{
-			if (UpdateKeyChainData(usernameValue, passwordValue))
-			{
-				UserDataAccess.UpdateTouchIdSetting(userId, isEnabled);
-				return true;
-			}
-			return false;
 		}
 
 		/// <summary>
@@ -384,31 +217,6 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
 			// Ask user for local notifications
 			var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, null);
 			UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-		}
-
-		/// <summary>
-		/// Unsubscribes from remote notifications.
-		/// </summary>
-		public static void UnsubscribeFromRemoteNotification(UserViewModel user, Action unregisterForRemoteNotifications, Action<string, string> onError)
-		{
-			// Unregister from remote notifications
-			if (unregisterForRemoteNotifications != null)
-			{
-				unregisterForRemoteNotifications();
-			}
-			SharedViewLogic.UpdatePushNotifications(user, false, onError);
-		}
-
-		/// <summary>
-		/// Subscribes to remote notifications.
-		/// </summary>
-		public static void SubscribeForRemoteNotification(UserViewModel user, Action registerForRemoteNotifications, Action<string, string> onError)
-		{
-			if (registerForRemoteNotifications != null)
-			{
-				registerForRemoteNotifications();
-			}
-			SharedViewLogic.UpdatePushNotifications(user, true, onError);
 		}
 
 		/// <summary>

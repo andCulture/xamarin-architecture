@@ -1,29 +1,27 @@
 ﻿using Foundation;
+using Mobile.Core.Models;
 using Newtonsoft.Json;
 using Security;
-using SyncedCare.Mobile.Core.ViewModels.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SyncedCare.Mobile.Presentation.iOS.Helpers
 {
     public static class KeychainHelper
     {
-		private static string KEY = "synced_care";
+        // TODO: Rename to something representative of your app.
+		private static string KEY = "demo_app";
         /// <summary>
         /// Adds an entry into key chain. If a duplicate is found, it is removed & re-added.
         /// </summary>
         /// <param name="secureValues">Object containing secure values</param>
         /// <returns>Whether the key chain entry was added successfully.</returns>
-        public static bool StoreSecureDataInKeychain(SecureValuesViewModel secureValues)
+        public static bool StoreSecureDataInKeychain(KeyStoreModel secureValues)
         {
 			var success = false;
             var s = new SecRecord(SecKind.GenericPassword)
             {
                 ValueData = NSData.FromString(JsonConvert.SerializeObject(secureValues)),
                 Generic = NSData.FromString(KEY),
-				AccessGroup = "H29ZBDYNSU.com.syncedcare.patientapp"
+				AccessGroup = "H29ZBDYNSU.com.andculture.boilerplate" // TODO: Change to your app's bundle id
             };
             var err = SecKeyChain.Add(s);
             if(err == SecStatusCode.DuplicateItem)
@@ -66,18 +64,17 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
         /// Gets a string value from keychain for the supplied key.
         /// </summary>
         /// <returns>The value of the entry as a string.</returns>
-        public static SecureValuesViewModel GetSecureDataFromKeychain()
+        public static KeyStoreModel GetSecureDataFromKeychain()
         {
-            SecureValuesViewModel result = null;
-            SecStatusCode res;
+            KeyStoreModel result = null;
             var rec = new SecRecord(SecKind.GenericPassword)
             {
                 Generic = NSData.FromString(KEY)
             };
-            var match = SecKeyChain.QueryAsRecord(rec, out res);
+            var match = SecKeyChain.QueryAsRecord(rec, out SecStatusCode res);
             if (match != null && match.ValueData != null)
             {
-                result = JsonConvert.DeserializeObject<SecureValuesViewModel>(match.ValueData.ToString());
+                result = JsonConvert.DeserializeObject<KeyStoreModel>(match.ValueData.ToString());
             }
 
             return result;

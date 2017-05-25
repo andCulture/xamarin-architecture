@@ -3,9 +3,9 @@ using CoreGraphics;
 using Foundation;
 using System;
 using UIKit;
-using SyncedCare.Mobile.Presentation.iOS.Helpers;
+using Mobile.iOS.Utilities;
 
-namespace SyncedCare.Mobile.Presentation.iOS.Extensions
+namespace Mobile.iOS.Extensions
 {
     public static class UIExtensions
     {
@@ -195,11 +195,8 @@ namespace SyncedCare.Mobile.Presentation.iOS.Extensions
 			UIView.Animate(0.3f, delay, UIViewAnimationOptions.CurveLinear, () =>
 			{
 				view.Alpha = 1;
-				if (afterAnimation != null)
-				{
-					afterAnimation();
-				}
-			}, null);
+                afterAnimation?.Invoke();
+            }, null);
         }
 
 		/// <summary>
@@ -216,11 +213,8 @@ namespace SyncedCare.Mobile.Presentation.iOS.Extensions
 			}, () =>
 			{
 				view.Hidden = true;
-				if (afterAnimation != null)
-				{
-					afterAnimation();
-				}
-			});
+                afterAnimation?.Invoke();
+            });
         }
 
         /// <summary>
@@ -233,10 +227,12 @@ namespace SyncedCare.Mobile.Presentation.iOS.Extensions
         {
             view.Layer.CornerRadius = 0;
             var shapePath = UIBezierPath.FromRoundedRect(view.Bounds, corners, radii);
-            var cornerLayer = new CAShapeLayer();
-            cornerLayer.Frame = view.Bounds;
-            cornerLayer.Path = shapePath.CGPath;
-            view.Layer.Mask = cornerLayer;
+            using (var cornerLayer = new CAShapeLayer())
+            {
+                cornerLayer.Frame = view.Bounds;
+                cornerLayer.Path = shapePath.CGPath;
+                view.Layer.Mask = cornerLayer;
+            }
         }
 
         /// <summary>
@@ -359,23 +355,12 @@ namespace SyncedCare.Mobile.Presentation.iOS.Extensions
         }
 
 		/// <summary>
-		/// Applies card styles to a view
-		/// </summary>
-		/// <param name="view">The view to style</param>
-		/// <param name="isDisabled">Whether the card should render as disabled.</param>
-		public static void ApplyCardStyles(this UIView view, bool isDisabled)
-		{
-			view.BackgroundColor = !isDisabled ? AppColors.WHITE.ToUIColor() : AppColors.LIGHTEST_GRAY.ToUIColor();
-            view.MakeLayerShadow();
-        }
-
-		/// <summary>
 		/// Makes the view's layer contain a shadow.
 		/// </summary>
 		/// <param name="view">View.</param>
         public static void MakeLayerShadow(this UIView view)
         {
-            view.Layer.ShadowColor = AppColors.DARKEST_GRAY.ToUIColor().CGColor;
+            view.Layer.ShadowColor = AppColors.BLACK.ToUIColor().CGColor;
             view.Layer.ShadowOffset = new CGSize(0f, 10f);
             view.Layer.ShadowRadius = 5f;
             view.Layer.ShadowOpacity = .2f;

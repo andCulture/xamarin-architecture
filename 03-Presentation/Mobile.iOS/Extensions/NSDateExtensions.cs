@@ -5,9 +5,9 @@ namespace SyncedCare.Mobile.Presentation.iOS.Extensions
 {
 	public static class NSDateExtensions
 	{
-		static DateTime reference = new DateTime(2001, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        static readonly DateTime reference = new DateTime(2001, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
-		public static DateTime ToDateTime(this NSDate date)
+        public static DateTime ToDateTime(this NSDate date)
 		{
 			var utcDateTime = reference.AddSeconds(date.SecondsSinceReferenceDate);
 			var dateTime = utcDateTime.ToLocalTime();

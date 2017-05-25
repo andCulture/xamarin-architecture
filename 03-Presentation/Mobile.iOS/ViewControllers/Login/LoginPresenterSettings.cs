@@ -1,9 +1,11 @@
-﻿using UIKit;
+﻿using System;
+using UIKit;
 
-namespace Mobile.iOS.ViewControllers.Profile
+namespace Mobile.iOS.ViewControllers.Login
 {
-	public class ProfilePresenterSettings
+	public class LoginPresenterSettings
 	{
-		internal UIView ContentView { get; set; }
+		internal UIView         ContentView             { get; set; }
+        internal EventHandler   OnSubmitButtonTapped    { get; set; }
 	}
 }

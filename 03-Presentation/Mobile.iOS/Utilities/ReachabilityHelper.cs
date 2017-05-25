@@ -27,9 +27,7 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
                 _defaultRouteReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
 
-            NetworkReachabilityFlags flags;
-
-            return _defaultRouteReachability.TryGetFlags(out flags) &&
+            return _defaultRouteReachability.TryGetFlags(out NetworkReachabilityFlags flags) &&
                 IsReachableWithoutRequiringConnection(flags);
         }
 
@@ -52,11 +50,7 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
 
         private static void OnChange(NetworkReachabilityFlags flags)
         {
-            var h = ReachabilityChanged;
-            if (h != null)
-            {
-                h(null, EventArgs.Empty);
-            }
+            ReachabilityChanged?.Invoke(null, EventArgs.Empty);
         }
     }
 }

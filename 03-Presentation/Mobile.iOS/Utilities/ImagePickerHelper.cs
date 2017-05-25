@@ -1,13 +1,12 @@
-﻿using CoreGraphics;
+﻿using AVFoundation;
 using Foundation;
-using SyncedCare.Mobile.Presentation.iOS.Delegates;
+using Mobile.iOS.Delegates;
+using Mobile.iOS.ViewControllers.Base;
+using Photos;
 using System;
 using UIKit;
-using SyncedCare.Mobile.Presentation.iOS.Controllers.Base;
-using AVFoundation;
-using Photos;
 
-namespace SyncedCare.Mobile.Presentation.iOS.Helpers
+namespace Mobile.iOS.Utilities
 {
     public static class ImagePickerHelper
     {
@@ -180,7 +179,7 @@ namespace SyncedCare.Mobile.Presentation.iOS.Helpers
         {
             if (picker != null)
             {
-                picker.DismissModalViewController(true);
+                picker.DismissViewController(true, null);
                 picker.Dispose();
                 picker = null;
             }

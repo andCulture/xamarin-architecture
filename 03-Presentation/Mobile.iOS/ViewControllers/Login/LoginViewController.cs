@@ -1,12 +1,13 @@
-﻿using Autofac;
+﻿using System;
+using Autofac;
 using Mobile.Core.Interfaces.Conductors;
 using Mobile.iOS.ViewControllers.Base;
 using Mobile.Presentation.Shared.ApplicationObjects;
 using Mobile.Services.Realm;
 
-namespace Mobile.iOS.ViewControllers.Profile
+namespace Mobile.iOS.ViewControllers.Login
 {
-	public partial class ProfileViewController : BaseScrollViewController
+	public class LoginViewController : BaseScrollViewController
 	{
 		#region Private Members
 
@@ -16,20 +17,29 @@ namespace Mobile.iOS.ViewControllers.Profile
 
 		#region Variables
 
-		internal ProfilePresenter Presenter { get; private set; }
-		internal ProfileLayout Layout { get; private set; }
+		internal LoginPresenter Presenter { get; private set; }
+		internal LoginLayout Layout { get; private set; }
 
 		#endregion Variables
 
 		#region Constructors
 
-		public ProfileViewController() : base()
+		public LoginViewController() : base()
 		{
 		}
 
 		#endregion Constructors
 
 		#region Overrides
+
+		/// <summary>
+		/// Hide the status bar
+		/// </summary>
+		/// <returns><c>true</c>, if status bar hidden was preferred, <c>false</c> otherwise.</returns>
+		public override bool PrefersStatusBarHidden()
+		{
+			return true;
+		}
 
 		protected override void ResolveConductors()
 		{
@@ -43,7 +53,7 @@ namespace Mobile.iOS.ViewControllers.Profile
 		{
 			get
 			{
-				return "Profile";
+				return "Login";
 			}
 		}
 
@@ -53,11 +63,12 @@ namespace Mobile.iOS.ViewControllers.Profile
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			Presenter = new ProfilePresenter(new ProfilePresenterSettings()
+			Presenter = new LoginPresenter(new LoginPresenterSettings()
 			{
-				ContentView = ContentView
+				ContentView = ContentView,
+                OnSubmitButtonTapped = OnLoginButtonTapped,
 			});
-			Layout = new ProfileLayout(Presenter);
+			Layout = new LoginLayout(Presenter);
 			RegisterPresenterAndLayout(Presenter, Layout);
 		}
 
@@ -67,6 +78,7 @@ namespace Mobile.iOS.ViewControllers.Profile
 		/// <param name="animated"></param>
 		public override void ViewWillAppear(bool animated)
 		{
+            NavigationController?.SetNavigationBarHidden(true, false);
 			base.ViewWillAppear(animated);
 		}
 
@@ -77,6 +89,12 @@ namespace Mobile.iOS.ViewControllers.Profile
 		#endregion Private Methods
 
 		#region Event Handlers
+
+        private void OnLoginButtonTapped(object sender, EventArgs args)
+        {
+            var user = _conductor.LoginUser("test", "test");
+            ShowAlert($"You logged in as {user.FullName}", "Success");
+        }
 
 		#endregion Event Handlers
 	}
