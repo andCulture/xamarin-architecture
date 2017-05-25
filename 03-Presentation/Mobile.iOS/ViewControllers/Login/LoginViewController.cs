@@ -17,8 +17,8 @@ namespace Mobile.iOS.ViewControllers.Login
 
 		#region Variables
 
-		internal LoginPresenter Presenter { get; private set; }
-		internal LoginLayout Layout { get; private set; }
+		internal LoginLayout    Layout      { get; private set; }
+        internal LoginPresenter Presenter   { get; private set; }
 
 		#endregion Variables
 

@@ -125,7 +125,6 @@
     <Folder Include="Resources\" />
     <Folder Include="ViewControllers\" />
     <Folder Include="Delegates\" />
-    <Folder Include="ExtensionMethods\" />
     <Folder Include="Images\" />
     <Folder Include="TableSources\" />
     <Folder Include="Utilities\" />
