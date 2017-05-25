@@ -74,6 +74,31 @@ namespace Mobile.DataAccess
 			return vUser;
 		}
 
+        public UserView GetUserByEmail(string email)
+        {
+			var vUser = new UserView
+			{
+				Errors = new List<Error>()
+			};
+
+			var userEntity = _userDatabaseService.GetByEmail(email);
+			// Validate the result
+			if (userEntity == null)
+			{
+				vUser.Errors.Add(new Error
+				{
+					ErrorType = ErrorType.Error,
+					Key = "UserAccess.GetUserByEmail",
+					Message = $"No user found with email: {email}."
+				});
+				return vUser;
+			}
+			// Set user view properties.
+			vUser.Email = userEntity.Email;
+			vUser.FullName = $"{userEntity.FirstName} {userEntity.LastName}";
+			return vUser;
+        }
+
 		#endregion IUserDataAccess Implementation
 	}
 }

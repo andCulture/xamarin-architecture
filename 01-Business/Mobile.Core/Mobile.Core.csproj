@@ -40,8 +40,9 @@
     <Compile Include="Enumerations\ErrorType.cs" />
     <Compile Include="Interfaces\DataAccess\IUserDataAccess.cs" />
     <Compile Include="Interfaces\Conductors\IConductor.cs" />
-    <Compile Include="Interfaces\Conductors\IProfileConductor.cs" />
+    <Compile Include="Interfaces\Conductors\ILoginConductor.cs" />
     <Compile Include="Interfaces\DataAccess\IDataAccess.cs" />
+    <Compile Include="Models\KeyStoreModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

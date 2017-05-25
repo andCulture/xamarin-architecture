@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Integration\ConductorTestBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Integration\ProfileConductorTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Integration\LoginConductorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Integration\" />

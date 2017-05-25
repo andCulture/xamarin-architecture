@@ -10,7 +10,7 @@ namespace Mobile.iOS.ViewControllers.Profile
 	{
 		#region Private Members
 
-		private IProfileConductor<User> _conductor;
+		private ILoginConductor<User> _conductor;
 
 		#endregion Private Members
 
@@ -35,7 +35,7 @@ namespace Mobile.iOS.ViewControllers.Profile
 		{
 			using (var scope = AppContainer.Container.BeginLifetimeScope())
       		{
-				_conductor = scope.Resolve<IProfileConductor<User>>();
+				_conductor = scope.Resolve<ILoginConductor<User>>();
       		}
 		}
 

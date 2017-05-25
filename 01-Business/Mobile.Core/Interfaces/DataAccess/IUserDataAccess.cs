@@ -8,5 +8,6 @@ namespace Mobile.Core.Interfaces.DataAccess
 	{
 		UserView CreateUser(TUser user);
 		UserView GetUser(int id);
+        UserView GetUserByEmail(string email);
 	}
 }

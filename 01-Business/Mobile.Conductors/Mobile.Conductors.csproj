@@ -30,7 +30,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseConductor.cs" />
-    <Compile Include="ProfileConductor.cs" />
+    <Compile Include="LoginConductor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mobile.Core\Mobile.Core.csproj">

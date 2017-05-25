@@ -22,7 +22,7 @@ namespace Mobile.Presentation.Shared.ExtensionMethods
 		/// </summary>
 		public static void RegisterConductors(this ContainerBuilder builder)
 		{
-			builder.RegisterType<ProfileConductor<User>>().As<IProfileConductor<User>>();
+			builder.RegisterType<LoginConductor<User>>().As<ILoginConductor<User>>();
 		}
 
 		/// <summary>

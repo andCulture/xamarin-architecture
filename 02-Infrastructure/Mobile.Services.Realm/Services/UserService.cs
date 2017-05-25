@@ -44,7 +44,21 @@ namespace Mobile.Services.Realm
 			return _context.All<User>().Where(u => u.DeletedOn == null);
 		}
 
-		public override User GetById(int id)
+		public User GetByEmail(string email)
+		{
+			if (_context == null)
+			{
+				return null;
+			}
+			var users = _context.All<User>().Where(u => u.Email == email && u.DeletedOn == null);
+			if (users == null || users.Count() == 0)
+			{
+				return null;
+			}
+			return users.First();
+		}
+
+        public override User GetById(int id)
 		{
 			if (_context == null)
 			{
