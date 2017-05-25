@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Core", "01-Business\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Conductors", "01-Business\Mobile.Conductors\Mobile.Conductors.csproj", "{EDCBD41D-077E-4806-9BE4-C672533EA6DC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Infrasructure", "02-Infrasructure", "{6103BC49-6FD9-4A86-8F92-EBC05E9171C3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Infrastructure", "02-Infrastructure", "{6103BC49-6FD9-4A86-8F92-EBC05E9171C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Services.Realm", "02-Infrastructure\Mobile.Services.Realm\Mobile.Services.Realm.csproj", "{711CE704-A550-48F9-8C12-6565D1E540C6}"
 EndProject
