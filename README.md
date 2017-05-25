@@ -1,7 +1,17 @@
-# xamarin-architecture
+# Xamarin Architecture
 
-This is the start of a Xamarin Onion Architecture sample project including both Android and iOS Presentation projects.
+This is a boilerplate solution using the onion architecture for Xamarin.iOS and Xamarin.Android mobile projects.
 
-Before you can debug the iOS project, you must connect Visual Studio to a Mac build host, and generate valid keys from the Apple Developer Center.
+### Current Dependencies
+* [Realm](https://realm.io/) - Mobile database
+* [Autofac](https://autofac.org/) - Dependency Injection
+* [Automapper](http://automapper.org/) - Object mapper
+* [XamSvg](https://components.xamarin.com/view/xamsvg) - Vector image support in iOS and Android
+* [NUnit](https://www.nunit.org/) - Unit testing framework
+* [Shouldly](https://github.com/shouldly/shouldly) - Testing assertion framework
 
-The iOS project is not using any shared code currently. Pull requests to update are welcome.
+### Setup
+##### Mac
+*Coming soon...*
+##### Windows
+*Coming soon...*
