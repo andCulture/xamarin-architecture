@@ -1,10 +1,9 @@
-﻿using Mobile.Core.Interfaces.Entities;
+﻿﻿using Mobile.Core.Interfaces.Entities;
 
 namespace Mobile.Core.Interfaces.Services.Database
 {
-	public interface IUserService<T> : IServiceBase<T>
-		where T : IUser
+	public interface IUserService : IServiceBase
 	{
-        T GetByEmail(string email);
+        IUser GetByEmail(string email);
 	}
 }

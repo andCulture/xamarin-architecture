@@ -3,10 +3,12 @@ using System;
 using UIKit;
 using System.Collections.Generic;
 using CoreGraphics;
+using Mobile.ViewModels.ViewModels;
 
 namespace Mobile.iOS.ViewControllers.Base
 {
-    public abstract partial class BaseScrollViewController : BaseViewController
+    public abstract partial class BaseScrollViewController<TViewModel> : BaseViewController<TViewModel>
+        where TViewModel : BaseViewModel
     {
         #region Variables 
 
@@ -34,10 +36,10 @@ namespace Mobile.iOS.ViewControllers.Base
 
         #region Constructor
 
-        public BaseScrollViewController(IntPtr handle) : base(handle)
+        protected BaseScrollViewController(IntPtr handle) : base(handle)
         {
         }
-        public BaseScrollViewController() : base()
+        protected BaseScrollViewController() : base()
         {
         }
 

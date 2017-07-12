@@ -1,7 +1,7 @@
 ﻿using System;
 using Foundation;
 
-namespace SyncedCare.Mobile.Presentation.iOS.Extensions
+namespace Mobile.iOS.Extensions
 {
 	public static class NSDateExtensions
 	{

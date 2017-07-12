@@ -1,7 +1,7 @@
 ﻿using Foundation;
 using System;
 
-namespace SyncedCare.Mobile.Presentation.iOS.Extensions
+namespace Mobile.iOS.Extensions
 {
     public static class NSObjectExtensions
     {

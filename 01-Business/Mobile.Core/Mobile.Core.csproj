@@ -32,7 +32,6 @@
     <Compile Include="Interfaces\Entities\IUser.cs" />
     <Compile Include="Interfaces\Entities\IEntityBase.cs" />
     <Compile Include="Interfaces\Services\Database\IUserService.cs" />
-    <Compile Include="Interfaces\Services\Database\IServiceBase.cs" />
     <Compile Include="Models\Views\UserView.cs" />
     <Compile Include="Models\Views\BaseView.cs" />
     <Compile Include="Models\Error.cs" />
@@ -43,6 +42,8 @@
     <Compile Include="Interfaces\Conductors\ILoginConductor.cs" />
     <Compile Include="Interfaces\DataAccess\IDataAccess.cs" />
     <Compile Include="Models\KeyStoreModel.cs" />
+    <Compile Include="Interfaces\Services\Database\IServiceBase.cs" />
+    <Compile Include="Models\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

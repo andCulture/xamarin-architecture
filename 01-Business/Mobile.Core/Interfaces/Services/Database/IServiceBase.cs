@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace Mobile.Core.Interfaces.Services.Database
 {
-	public interface IServiceBase<T> where T : IEntityBase
+	public interface IServiceBase
 	{
-		IQueryable<T> 		GetAll();
-		T 					GetById(int id);
-		T 					Save(T entity);
-		void 				Delete(int id, bool isSoft = true);
-		void 				DeleteAll(bool isSoft = true);
+		IQueryable<IEntityBase> GetAll(bool includeDeleted = false);
+		IEntityBase 			GetById(string id);
+		void 				    Save(IEntityBase entity);
+		void 				    Delete(string id, bool isSoft = true);
+		void 				    DeleteAll(bool isSoft = true);
 	}
 }

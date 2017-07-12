@@ -5,6 +5,7 @@ using Mobile.iOS.ViewControllers.Base;
 using Photos;
 using System;
 using UIKit;
+using Mobile.ViewModels.ViewModels;
 
 namespace Mobile.iOS.Utilities
 {
@@ -41,7 +42,8 @@ namespace Mobile.iOS.Utilities
 		/// <param name="callback">Action to call after photo is captured.</param>
 		/// <param name="onCancel">Action to call if canceling from camera.</param>
 		/// <param name="cameraToUse">Can set to default the front or rear camera.</param>
-		public static void TakePicture(BaseViewController parent, Action<NSDictionary> callback, Action onCancel, UIImagePickerControllerCameraDevice cameraToUse = UIImagePickerControllerCameraDevice.Front)
+		public static void TakePicture<TViewModel>(BaseViewController<TViewModel> parent, Action<NSDictionary> callback, Action onCancel, UIImagePickerControllerCameraDevice cameraToUse = UIImagePickerControllerCameraDevice.Front)
+            where TViewModel : BaseViewModel
 		{
 			var status = AVCaptureDevice.GetAuthorizationStatus(AVMediaType.Video);
 			if (status == AVAuthorizationStatus.NotDetermined)
@@ -76,7 +78,8 @@ namespace Mobile.iOS.Utilities
         /// </summary>
         /// <param name="parent">The parent view controller that invoked the method.</param>
         /// <param name="callback">The function to call after a picture was chosen.</param>
-        public static void SelectPicture(BaseViewController parent, Action<NSDictionary> callback, Action onCancel)
+        public static void SelectPicture<TViewModel>(BaseViewController<TViewModel> parent, Action<NSDictionary> callback, Action onCancel)
+            where TViewModel : BaseViewModel
         {
 			var status = PHPhotoLibrary.AuthorizationStatus;
 			if (status == PHAuthorizationStatus.NotDetermined)
@@ -112,7 +115,8 @@ namespace Mobile.iOS.Utilities
 		/// <param name="parent">Parent view controller</param>
 		/// <param name="title">Title of the alert</param>
 		/// <param name="message">Alert message</param>
-		private static void OpenSettingsAlert(BaseViewController parent, string title, string message)
+		private static void OpenSettingsAlert<TViewModel>(BaseViewController<TViewModel> parent, string title, string message)
+            where TViewModel : BaseViewModel
 		{
 			parent.InvokeOnMainThread(delegate
 			{
@@ -137,7 +141,8 @@ namespace Mobile.iOS.Utilities
 		/// <param name="parent">Parent view controller</param>
 		/// <param name="callback">Callback once photo is selected.</param>
 		/// <param name="onCancel">On cancel action.</param>
-		private static void InitializePhotoPicker(BaseViewController parent, Action<NSDictionary> callback, Action onCancel)
+		private static void InitializePhotoPicker<TViewModel>(BaseViewController<TViewModel> parent, Action<NSDictionary> callback, Action onCancel)
+            where TViewModel : BaseViewModel
 		{
 			_callback = callback;
 			_onCancel = onCancel;
@@ -153,7 +158,8 @@ namespace Mobile.iOS.Utilities
 		/// <param name="callback">Callback once photo is taken</param>
 		/// <param name="onCancel">On cancel action</param>
 		/// <param name="cameraToUse">Camera to use.</param>
-		private static void InitializeCamera(BaseViewController parent, Action<NSDictionary> callback, Action onCancel, UIImagePickerControllerCameraDevice cameraToUse)
+		private static void InitializeCamera<TViewModel>(BaseViewController<TViewModel> parent, Action<NSDictionary> callback, Action onCancel, UIImagePickerControllerCameraDevice cameraToUse)
+            where TViewModel : BaseViewModel
 		{
 			_callback = callback;
 			_onCancel = onCancel;

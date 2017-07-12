@@ -3,10 +3,13 @@ using System;
 using System.IO;
 using System.Net;
 using UIKit;
+using MvvmCross.iOS.Views;
+using Mobile.ViewModels.ViewModels;
 
 namespace Mobile.iOS.ViewControllers.Base
 {
-    public abstract partial class BaseViewController : UIViewController
+    public abstract partial class BaseViewController<TViewModel> : MvxViewController 
+        where TViewModel : BaseViewModel
     {
         #region Variables
 
@@ -16,13 +19,12 @@ namespace Mobile.iOS.ViewControllers.Base
 
         #region Constructors
 
-        public BaseViewController(IntPtr handle) : base(handle)
+        protected BaseViewController(IntPtr handle) : base(handle)
         {
         }
 
-        public BaseViewController() : base()
+        protected BaseViewController() : base()
         {
-			ResolveConductors();
         }
 
         #endregion Constructors
@@ -80,24 +82,7 @@ namespace Mobile.iOS.ViewControllers.Base
 
 		#endregion Overrides
 
-		#region Abstract Methods
-
-		protected abstract void ResolveConductors();
-
-		#endregion Abstract Methods
-
 		#region Protected Methods
-
-		/// <summary>
-		/// Registers the presenter and layout.
-		/// </summary>
-		/// <param name="presenter">Presenter.</param>
-		/// <param name="layout">Layout.</param>
-		protected void RegisterPresenterAndLayout(BasePresenter presenter, BaseLayout layout)
-		{
-			presenter.InitializeViews();
-			layout.ConfigureLayoutConstraints();
-		}
 
 		/// <summary>
         /// Displays an alert dialog.

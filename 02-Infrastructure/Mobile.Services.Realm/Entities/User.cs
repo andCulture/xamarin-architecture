@@ -13,7 +13,7 @@ namespace Mobile.Services.Realm
 		public string 			Email { get; set; }
 		public string 			FirstName { get; set; }
 		[PrimaryKey]
-		public int 				Id { get; set; }
+		public string 			Id { get; set; }
 		public string 			LastName { get; set; }
 		public string 			UpdatedBy { get; set; }
 		public DateTimeOffset? 	UpdatedOn { get; set; }

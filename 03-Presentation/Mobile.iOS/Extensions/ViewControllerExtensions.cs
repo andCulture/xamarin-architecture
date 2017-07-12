@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace SyncedCare.Mobile.Presentation.iOS.Extensions
+namespace Mobile.iOS.Extensions
 {
     public static class ViewControllerExtensions
     {

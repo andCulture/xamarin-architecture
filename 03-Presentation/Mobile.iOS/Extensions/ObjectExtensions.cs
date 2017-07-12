@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace SyncedCare.Mobile.Presentation.iOS.Extensions
+namespace Mobile.iOS.Extensions
 {
 	public static class ObjectExtensions
 	{

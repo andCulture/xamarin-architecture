@@ -127,17 +127,9 @@
     <Compile Include="UnitTestAppDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\01-Business\Mobile.Conductors\Mobile.Conductors.csproj">
-      <Project>{EDCBD41D-077E-4806-9BE4-C672533EA6DC}</Project>
-      <Name>Mobile.Conductors</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\01-Business\Mobile.Core\Mobile.Core.csproj">
       <Project>{0969D6C0-A3C3-4D2C-9D06-582E08BD1323}</Project>
       <Name>Mobile.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\02-Infrastructure\Mobile.DataAccess\Mobile.DataAccess.csproj">
-      <Project>{9DA77D19-3188-45CD-B293-6CFCA6913C54}</Project>
-      <Name>Mobile.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\02-Infrastructure\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
       <Project>{711CE704-A550-48F9-8C12-6565D1E540C6}</Project>

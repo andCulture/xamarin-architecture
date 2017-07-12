@@ -1,122 +1,60 @@
-﻿using Mobile.Core.Interfaces.Services.Database;
-using System;
-using System.Linq;
+﻿using System.Linq;
+using AutoMapper;
+using Mobile.Core.Interfaces.Entities;
+using Mobile.Core.Interfaces.Services.Database;
 
 namespace Mobile.Services.Realm
 {
-	public class UserService : ServiceBase<User>, IUserService<User>
+    public class UserService : ServiceBase, IUserService
 	{
 		#region Constructor
 
-		public UserService(Realms.Realm context) : base(context)
+		public UserService(IMapper mappingEngine) : base(mappingEngine)
 		{
 		}
 
 		#endregion Constructor
 
-		#region IUserService Implementation
+		#region ServiceBase Implementation
 
-		public override void Delete(int id, bool isSoft = true)
+		public override void Delete(string id, bool isSoft = true)
 		{
-			var user = GetById(id);
-			if (user == null)
-			{
-				throw new Exception("User not found");
-			}
-			DeleteUser(user, isSoft);
+			var user = _repository.Query<User>(id);
+            _repository.Remove<User>(user, isSoft);
 		}
 
 		public override void DeleteAll(bool isSoft = true)
 		{
-			var users = GetAll();
-			if (users == null)
-			{
-				return;
-			}
-			foreach (var user in users)
-			{
-                DeleteUser(user, isSoft);
-			}
+			_repository.RemoveAll<User>(isSoft);
 		}
 
-		public override IQueryable<User> GetAll()
+		public override IQueryable<IEntityBase> GetAll(bool includeDeleted = false)
 		{
-			return _context.All<User>().Where(u => u.DeletedOn == null);
+            return GetAll<Core.Models.User, User>(includeDeleted);
 		}
 
-		public User GetByEmail(string email)
+        public override IEntityBase GetById(string id)
 		{
-			if (_context == null)
-			{
-				return null;
-			}
-			var users = _context.All<User>().Where(u => u.Email == email && u.DeletedOn == null);
-			if (users == null || users.Count() == 0)
-			{
-				return null;
-			}
-			return users.First();
+            var realmUser = _repository.Query<User>(id);
+            return _mappingEngine.Map<Core.Models.User>(realmUser);
+        }
+
+		public override void Save(IEntityBase entity)
+		{
+			var realmUser = _mappingEngine.Map<User>(entity);
+            _repository.AddOrUpdate(realmUser);
 		}
 
-        public override User GetById(int id)
-		{
-			if (_context == null)
-			{
-				return null;
-			}
-			var users = _context.All<User>().Where(u => u.Id == id && u.DeletedOn == null);
-			if (users == null || users.Count() == 0)
-			{
-				return null;
-			}
-			return users.First();
-		}
+		#endregion ServiceBase Implementation
 
-		public override User Save(User entity)
+		#region IUserService Implementation
+
+		public IUser GetByEmail(string email)
 		{
-			User user = null;
-			using (var trans = _context.BeginWrite())
-			{
-				user = _context.Add(obj: entity, update: true);
-				trans.Commit();
-			}
-			return user;
+            var realmUser = _repository.QueryAll<User>().Where(u => u.Email == email).FirstOrDefault();
+            return _mappingEngine.Map<Core.Models.User>(realmUser);
 		}
 
 		#endregion IUserService Implementation
-
-		#region Private Methods
-
-		private void DeleteUser(User user, bool isSoft)
-		{
-			if (isSoft)
-			{
-                SoftDeleteUser(user);
-			}
-			else
-			{
-				HardDeleteUser(user);
-			}
-		}
-
-		private void HardDeleteUser(User user)
-		{
-			using (var trans = _context.BeginWrite())
-			{
-				_context.Remove(user);
-				trans.Commit();
-			}
-		}
-
-		private void SoftDeleteUser(User user)
-		{
-			using (var trans = _context.BeginWrite())
-            {
-				user.DeletedOn = DateTimeOffset.Now;
-				trans.Commit();
-			}
-		}
-
-		#endregion Private Methods
 	}
 }
