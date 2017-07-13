@@ -4,23 +4,17 @@ using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Mobile.Core.Interfaces.Services.Database;
 using Mobile.Core.Models;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Mobile.ViewModels.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        #region Constants
-
-        const string LOGIN_TEXT = "Login";
-        const string PASSWORD_TEXT = "Password";
-        const string USERNAME_TEXT = "Username";
-
-        #endregion Constants
-
         #region Member Variables
 
         string _message;
+        readonly IMvxNavigationService _navigationService;
 		string _password;
         string _username;
 		readonly IUserDialogs _userDialog;
@@ -30,8 +24,9 @@ namespace Mobile.ViewModels.ViewModels
 
 		#region Constructors
 
-		public LoginViewModel(IUserService userService, IUserDialogs userDialog) : base()
+		public LoginViewModel(IMvxNavigationService navigationService, IUserService userService, IUserDialogs userDialog) : base()
         {
+            _navigationService = navigationService;
 			_userDialog = userDialog;
             _userService = userService;
         }
@@ -51,7 +46,7 @@ namespace Mobile.ViewModels.ViewModels
 
         #region Public Properties
 
-        public string LoginButtonText => LOGIN_TEXT;
+        public string LoginButtonText => AppText.LOGIN;
 
         public IMvxCommand LoginCommand => new MvxCommand(LoginUser);
 
@@ -79,7 +74,7 @@ namespace Mobile.ViewModels.ViewModels
 			}
 		}
 
-        public string PasswordPlaceholderText => PASSWORD_TEXT;
+        public string PasswordPlaceholderText => AppText.PASSWORD;
 
 		public string Username
 		{
@@ -93,7 +88,7 @@ namespace Mobile.ViewModels.ViewModels
 			}
 		}
 
-        public string UsernamePlaceholderText => USERNAME_TEXT;
+        public string UsernamePlaceholderText => AppText.USERNAME;
 
 		#endregion Public Properties
 
@@ -124,7 +119,13 @@ namespace Mobile.ViewModels.ViewModels
                     LastName = "User"
                 }); 
                 var user = _userService.GetByEmail(Username);
-                _userDialog.Alert($"You logged in as {user.FirstName} {user.LastName}", "Success");
+                if(user == null)
+                {
+                    _userDialog.Alert("Error", "Login Failed!");
+                    return;
+                }
+                // Navigate to the home view model.
+                _navigationService.Navigate<HomeViewModel, User>(user);
             }
 			catch(Exception ex)
             {

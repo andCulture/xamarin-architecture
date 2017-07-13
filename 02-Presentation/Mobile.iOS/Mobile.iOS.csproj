@@ -198,6 +198,13 @@
     <Compile Include="Mvx\DebugTrace.cs" />
     <Compile Include="Mvx\LinkerPleaseInclude.cs" />
     <Compile Include="Mvx\Setup.cs" />
+    <Compile Include="ViewControllers\HomeViewController.cs" />
+    <Compile Include="ViewControllers\HomeViewController.presenter.cs">
+      <DependentUpon>HomeViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\HomeViewController.layout.cs">
+      <DependentUpon>HomeViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\01-Business\Mobile.Core\Mobile.Core.csproj">
