@@ -33,6 +33,12 @@ namespace Mobile.iOS.ViewControllers
 			base.ViewDidLoad();
 			InitializeViews();
             ConfigureLayoutConstraints();
+            var vm = (LoginViewModel)this.ViewModel;
+            if(vm == null)
+            {
+                return;
+            }
+            vm.Initialize();
 		}
 
 		/// <summary>

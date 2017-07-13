@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Mobile.Core.Interfaces.Services.Database;
@@ -19,6 +20,7 @@ namespace Mobile.ViewModels.ViewModels
 
         #region Member Variables
 
+        string _message;
 		string _password;
         string _username;
 		readonly IUserDialogs _userDialog;
@@ -40,6 +42,7 @@ namespace Mobile.ViewModels.ViewModels
 
         public override Task Initialize()
         {
+            LoadData();
             //TODO: Add starting logic here
             return base.Initialize();
         }
@@ -51,6 +54,18 @@ namespace Mobile.ViewModels.ViewModels
         public string LoginButtonText => LOGIN_TEXT;
 
         public IMvxCommand LoginCommand => new MvxCommand(LoginUser);
+
+		public string Message
+		{
+			get
+			{
+				return _message;
+			}
+			set
+			{
+				SetProperty(ref _message, value);
+			}
+		}
 
 		public string Password
 		{
@@ -82,14 +97,25 @@ namespace Mobile.ViewModels.ViewModels
 
 		#endregion Public Properties
 
+		#region Public Methods
+
+		public async Task LoadData()
+		{
+            _userDialog.ShowLoading("Processing", MaskType.Black);
+            await Task.Factory.StartNew(SeedUsers);
+            _userDialog.HideLoading();
+		}
+
+		#endregion Public Methods
+
 		#region Private Methods
 
-        void LoginUser()
+		void LoginUser()
         {
 			// TODO: Replace with actual logic
             try
             {
-                _userService.Save(new Core.Models.User{
+                _userService.Save(new User {
                     CreatedBy = "Test",
                     CreatedOn = DateTime.Now,
                     Email = "test@test.com",
@@ -109,6 +135,45 @@ namespace Mobile.ViewModels.ViewModels
                     Message = $"Unable to find a user with the email {Username}."
                 });
             }
+        }
+
+        /// <summary>
+        /// This method is intended to test/demonstrate the interaction with the database across an async thread.
+        /// </summary>
+        void SeedUsers()
+        {
+			int count = 1;
+            // Ensure we have 10 users.
+			while (count < 11)
+			{
+				_userService.Save(new User
+				{
+					CreatedBy = "Test",
+					CreatedOn = DateTime.Now,
+					Email = $"test@test{count.ToString()}.com",
+					FirstName = "Test",
+					Id = count.ToString(),
+					LastName = $"User{count.ToString()}"
+				});
+				count++;
+			}
+            // Get all the users we just saved to ensure they are persisited in the database. 
+            var users = _userService.GetAll().ToList();
+
+            if(users == null || users.Count == 0)
+            {
+                return;
+            }
+            // Get the first user, and update their information.
+            var featuredUser = users[0];
+            featuredUser.LastName = "Succup";
+            featuredUser.Email = "suckup@email.com";
+            // Save the changes to the user
+            _userService.Save(featuredUser);
+            // Requery the user to ensure that the changes were persisted in the database.
+            var updatedUser = _userService.GetByEmail(featuredUser.Email);
+
+            Message = $"Join the {users.Count.ToString()} users! Take it from {updatedUser.FirstName} {updatedUser.LastName} 'I love this app!'";
         }
 
 		#endregion Private Methods

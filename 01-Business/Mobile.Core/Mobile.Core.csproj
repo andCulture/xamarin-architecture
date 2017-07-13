@@ -32,15 +32,9 @@
     <Compile Include="Interfaces\Entities\IUser.cs" />
     <Compile Include="Interfaces\Entities\IEntityBase.cs" />
     <Compile Include="Interfaces\Services\Database\IUserService.cs" />
-    <Compile Include="Models\Views\UserView.cs" />
-    <Compile Include="Models\Views\BaseView.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Interfaces\Models\IError.cs" />
     <Compile Include="Enumerations\ErrorType.cs" />
-    <Compile Include="Interfaces\DataAccess\IUserDataAccess.cs" />
-    <Compile Include="Interfaces\Conductors\IConductor.cs" />
-    <Compile Include="Interfaces\Conductors\ILoginConductor.cs" />
-    <Compile Include="Interfaces\DataAccess\IDataAccess.cs" />
     <Compile Include="Models\KeyStoreModel.cs" />
     <Compile Include="Interfaces\Services\Database\IServiceBase.cs" />
     <Compile Include="Models\User.cs" />
@@ -48,7 +42,6 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Models\DTOs\" />
-    <Folder Include="Models\Views\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Interfaces\Entities\" />
     <Folder Include="Interfaces\Services\" />
@@ -56,8 +49,6 @@
     <Folder Include="Interfaces\Services\Database\" />
     <Folder Include="Interfaces\Models\" />
     <Folder Include="Enumerations\" />
-    <Folder Include="Interfaces\DataAccess\" />
-    <Folder Include="Interfaces\Conductors\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

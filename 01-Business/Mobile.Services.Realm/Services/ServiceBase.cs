@@ -7,7 +7,7 @@ using Mobile.Services.Realm.Services;
 
 namespace Mobile.Services.Realm
 {
-	public abstract class ServiceBase : IServiceBase
+	public abstract class ServiceBase
 	{
 		#region Protected Members
 
@@ -25,16 +25,6 @@ namespace Mobile.Services.Realm
 		}
 
 		#endregion Constructor
-
-		#region Abstract Methods
-
-		public abstract void Delete(string id, bool isSoft = true);
-		public abstract void DeleteAll(bool isSoft = true);
-		public abstract IQueryable<IEntityBase> GetAll(bool includeDeleted = false);
-		public abstract IEntityBase GetById(string id);
-		public abstract void Save(IEntityBase entity);
-
-		#endregion Abstract Methods
 
 		#region Protected Methods
 
@@ -80,7 +70,7 @@ namespace Mobile.Services.Realm
             where TRealm : Realms.RealmObject, IEntityBase
 		{
 			var realmEntity = _mappingEngine.Map<TRealm>(entity);
-			_repository.AddOrUpdate(realmEntity);
+			_repository.AddOrUpdate<TRealm>(realmEntity);
 		}
 
 		#endregion Protected Methods

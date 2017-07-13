@@ -21,6 +21,7 @@ namespace Mobile.iOS.ViewControllers
         #region Views
 
         UISvgImageView AvatarImage { get; set; }
+		UILabel MessageLabel { get; set; }
         UITextField PasswordField { get; set; }
         UIButton SubmitButton { get; set; }
         UITextField UsernameField { get; set; }
@@ -63,8 +64,15 @@ namespace Mobile.iOS.ViewControllers
             {
                 TranslatesAutoresizingMaskIntoConstraints = false,
             };
+            // Message Label
+            MessageLabel = new UILabel 
+            {
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Lines = 0,
+                LineBreakMode = UILineBreakMode.WordWrap
+            };
             // Add the subviews to the content view.
-            ContentView.AddSubviews(AvatarImage, UsernameField, PasswordField, SubmitButton);
+            ContentView.AddSubviews(AvatarImage, UsernameField, PasswordField, SubmitButton, MessageLabel);
             SetupMvxBindings();
         }
 
@@ -92,6 +100,9 @@ namespace Mobile.iOS.ViewControllers
             bindings.Bind(SubmitButton)
                .For(b => b.BindTouchUpInside())
                .To(vm => vm.LoginCommand);
+			bindings.Bind(MessageLabel)
+			   .For(l => l.Text)
+			   .To(vm => vm.Message);
             bindings.Apply();
         }
     }

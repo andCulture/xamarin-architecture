@@ -136,7 +136,6 @@
       <Name>Mobile.Services.Realm</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\..\03-Presentation\Mobile.Presentation.Shared\Mobile.Presentation.Shared.projitems" Label="Shared" Condition="Exists('..\..\03-Presentation\Mobile.Presentation.Shared\Mobile.Presentation.Shared.projitems')" />
   <Import Project="..\Mobile.Conductors.Tests.Shared\Mobile.Conductors.Tests.Shared.projitems" Label="Shared" Condition="Exists('..\Mobile.Conductors.Tests.Shared\Mobile.Conductors.Tests.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Fody.2.0.6\build\netstandard1.4\Fody.targets" Condition="Exists('..\..\packages\Fody.2.0.6\build\netstandard1.4\Fody.targets')" />

@@ -1,5 +1,6 @@
 ﻿using Mobile.Core.Interfaces.Entities;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Mobile.Core.Interfaces.Services.Database
 {

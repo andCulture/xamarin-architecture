@@ -9,50 +9,37 @@ namespace Mobile.Services.Realm.Services
 {
 	public class RepositoryService : IRepositoryService
 	{
-		private readonly Realms.Realm _realm;
-		private readonly RealmConfiguration _config;
+		Realms.Realm _realm;
+		readonly RealmConfiguration _config;
 
 		public RepositoryService()
 		{
-			_realm = Realms.Realm.GetInstance();
-			AttachErrorHandler();
-		}
-
-		public RepositoryService(string databasePath)
-		{
-			_realm = Realms.Realm.GetInstance(databasePath);
-			AttachErrorHandler();
 		}
 
 		public RepositoryService(RealmConfiguration config)
 		{
 			_config = config;
-            _realm = GetInstance();
-			AttachErrorHandler();
 		}
 
-		public Realms.Realm GetInstance()
+        public void ConfigureInstance()
 		{
             if (_config != null)
             {
-                return Realms.Realm.GetInstance(_config);
+                _realm = Realms.Realm.GetInstance(_config);
             }
             else
             {
-                return Realms.Realm.GetInstance();
+                _realm = Realms.Realm.GetInstance();
             }
-		}
-
-		private void AttachErrorHandler()
-		{
-			_realm.Error += OnRealmError;
+            _realm.Error += OnRealmError;
 		}
 
 		public void AddOrUpdate<T>(T item) where T : RealmObject
 		{
-			_realm.Write(() =>
+            ConfigureInstance();
+			_realm.WriteAsync(tempRealm =>
 			{
-				_realm.Add<T>(item, true);
+				tempRealm.Add<T>(item, true);
 			});
 		}
 
@@ -61,6 +48,7 @@ namespace Mobile.Services.Realm.Services
 			if (items.Count() == 0)
 				return;
 
+            ConfigureInstance();
 			_realm.Write(() =>
 			{
 				foreach (var item in items)
@@ -72,40 +60,51 @@ namespace Mobile.Services.Realm.Services
 
 		public void Write(Action writeAction)
 		{
+            ConfigureInstance();
 			_realm.Write(writeAction);
 		}
 
 		public T Query<T>(long id) where T : RealmObject
 		{
+            ConfigureInstance();
 			return _realm.Find<T>(id);
 		}
 
 		public T Query<T>(string id) where T : RealmObject
 		{
-			if (string.IsNullOrEmpty(id))
-				return null;
+            if (string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
+            ConfigureInstance();
 			return _realm.Find<T>(id);
 		}
 
 		public RealmObject Query(string className, long id)
 		{
+            ConfigureInstance();
 			return _realm.Find(className, id);
 		}
 
 		public RealmObject Query(string className, string id)
 		{
-			if (string.IsNullOrEmpty(id))
-				return null;
+            if (string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
+            ConfigureInstance();
 			return _realm.Find(className, id);
 		}
 
 		public IQueryable<dynamic> QueryAll(string className)
 		{
+            ConfigureInstance();
 			return _realm.All(className);
 		}
 
 		public IQueryable<T> QueryAll<T>(bool includeDeleted = false) where T : RealmObject, IEntityBase
 		{
+            ConfigureInstance();
             if(includeDeleted)
             {
                 return _realm.All<T>();
@@ -115,21 +114,25 @@ namespace Mobile.Services.Realm.Services
 
 		public void RemoveAll()
 		{
+            ConfigureInstance();
 			_realm.Write(() => { _realm.RemoveAll(); });
 		}
 
 		public void RemoveAll(string className)
 		{
+            ConfigureInstance();
 			_realm.Write(() => { _realm.RemoveAll(className); });
 		}
 
 		public void RemoveAll<T>() where T : RealmObject
 		{
+            ConfigureInstance();
 			_realm.Write(() => { _realm.RemoveAll<T>(); });
 		}
 
 		public void RemoveAll<T>(bool isSoft = true) where T : RealmObject, IEntityBase
 		{
+            ConfigureInstance();
             if(isSoft) {
                 var items = QueryAll<T>();
                 _realm.Write(() => {
@@ -148,11 +151,13 @@ namespace Mobile.Services.Realm.Services
 
 		public void Remove<T>(T item) where T : RealmObject
 		{
+            ConfigureInstance();
 			_realm.Write(() => { _realm.Remove(item); });
 		}
 
 		public void Remove<T>(T item, bool isSoft = true) where T : RealmObject, IEntityBase
 		{
+            ConfigureInstance();
             if(isSoft)
             {
                 _realm.Write(() => {
@@ -167,33 +172,38 @@ namespace Mobile.Services.Realm.Services
 
 		public void RemoveRange<T>(IQueryable<T> range) where T : RealmObject
 		{
+            ConfigureInstance();
 			_realm.Write(() => { _realm.RemoveRange<T>(range); });
 		}
 
 		public void Refresh()
 		{
+            ConfigureInstance();
 			_realm.Refresh();
 		}
 
 		public void Dispose()
 		{
+            ConfigureInstance();
 			_realm.Dispose();
 		}
 
 		public void DeleteRealm()
 		{
+            ConfigureInstance();
 			Realms.Realm.DeleteRealm(_realm.Config);
 		}
 
 		private void OnRealmError(object sender, ErrorEventArgs args)
 		{
-			// TODO Add analytics here
+            // TODO Add analytics here
 		}
 
 		public void Dispose(bool disposing)
 		{
 			if (disposing)
 			{
+                ConfigureInstance();
 				_realm.Error -= OnRealmError;
 			}
 		}

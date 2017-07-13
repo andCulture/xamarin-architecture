@@ -47,6 +47,13 @@ namespace Mobile.iOS.ViewControllers
 				NSLayoutConstraint.Create(SubmitButton, NSLayoutAttribute.Left, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Left, 1, MARGIN),
 				NSLayoutConstraint.Create(SubmitButton, NSLayoutAttribute.Right, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Right, 1, -MARGIN)
 	        });
+			// Message Label
+			ContentView.AddConstraints(new[] {
+				NSLayoutConstraint.Create(MessageLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SubmitButton, NSLayoutAttribute.Bottom, 1, MARGIN * 2f),
+				NSLayoutConstraint.Create(MessageLabel, NSLayoutAttribute.Height, NSLayoutRelation.GreaterThanOrEqual, null, NSLayoutAttribute.NoAttribute, 1, FIELD_SIZE),
+				NSLayoutConstraint.Create(MessageLabel, NSLayoutAttribute.Left, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Left, 1, MARGIN),
+				NSLayoutConstraint.Create(MessageLabel, NSLayoutAttribute.Right, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Right, 1, -MARGIN)
+			});
 		}
 
 		#endregion Private Methods

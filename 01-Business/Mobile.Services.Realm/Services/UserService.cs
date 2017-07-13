@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
-using Mobile.Core.Interfaces.Entities;
 using Mobile.Core.Interfaces.Services.Database;
 
 namespace Mobile.Services.Realm
@@ -15,41 +15,33 @@ namespace Mobile.Services.Realm
 
 		#endregion Constructor
 
-		#region ServiceBase Implementation
+		#region IUserService Implementation
 
-		public override void Delete(string id, bool isSoft = true)
+		public void Delete(string id, bool isSoft = true)
 		{
             Delete<User>(id, isSoft);
 		}
 
-		public override void DeleteAll(bool isSoft = true)
+		public void DeleteAll(bool isSoft = true)
 		{
 			DeleteAll<User>();
 		}
 
-		public override IQueryable<IEntityBase> GetAll(bool includeDeleted = false)
+		public List<Core.Models.User> GetAll(bool includeDeleted = false)
 		{
-            return GetAll<Core.Models.User, User>(includeDeleted);
+            var users = GetAll<Core.Models.User, User>(includeDeleted);
+            return users.ToList();
 		}
 
-        public override IEntityBase GetById(string id)
+		public Core.Models.User GetByEmail(string email)
 		{
-            return GetById<User, Core.Models.User>(id);
-        }
+			var realmUser = _repository.QueryAll<User>().Where(u => u.Email == email).FirstOrDefault();
+			return _mappingEngine.Map<Core.Models.User>(realmUser);
+		}
 
-		public override void Save(IEntityBase entity)
+		public void Save(Core.Models.User entity)
 		{
 			Save<User>(entity);
-		}
-
-		#endregion ServiceBase Implementation
-
-		#region IUserService Implementation
-
-		public IUser GetByEmail(string email)
-		{
-            var realmUser = _repository.QueryAll<User>().Where(u => u.Email == email).FirstOrDefault();
-            return _mappingEngine.Map<Core.Models.User>(realmUser);
 		}
 
 		#endregion IUserService Implementation

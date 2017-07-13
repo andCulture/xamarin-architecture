@@ -8,7 +8,7 @@ namespace Mobile.Services.Realm.Interfaces
 {
 	public interface IRepositoryService : IDisposable
 	{
-		Realms.Realm GetInstance();
+        void ConfigureInstance();
 		void AddOrUpdate<T>(T item) where T : RealmObject;
 		void AddOrUpdate<T>(IEnumerable<T> items) where T : RealmObject;
 		void Write(Action writeAction);
