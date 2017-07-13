@@ -73,7 +73,7 @@
       <Project>{0969D6C0-A3C3-4D2C-9D06-582E08BD1323}</Project>
       <Name>Mobile.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\02-Infrastructure\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
+    <ProjectReference Include="..\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
       <Project>{711CE704-A550-48F9-8C12-6565D1E540C6}</Project>
       <Name>Mobile.Services.Realm</Name>
     </ProjectReference>

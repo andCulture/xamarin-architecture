@@ -5,25 +5,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Business", "01-Business"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Core", "01-Business\Mobile.Core\Mobile.Core.csproj", "{0969D6C0-A3C3-4D2C-9D06-582E08BD1323}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Infrastructure", "02-Infrastructure", "{6103BC49-6FD9-4A86-8F92-EBC05E9171C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Services.Realm", "01-Business\Mobile.Services.Realm\Mobile.Services.Realm.csproj", "{711CE704-A550-48F9-8C12-6565D1E540C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Services.Realm", "02-Infrastructure\Mobile.Services.Realm\Mobile.Services.Realm.csproj", "{711CE704-A550-48F9-8C12-6565D1E540C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Services.Http", "01-Business\Mobile.Services.Http\Mobile.Services.Http.csproj", "{B907FBA8-CABF-43B4-A8F9-0D1006E51F47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Services.Http", "02-Infrastructure\Mobile.Services.Http\Mobile.Services.Http.csproj", "{B907FBA8-CABF-43B4-A8F9-0D1006E51F47}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Presentation", "02-Presentation", "{F20449FD-5F7C-446A-B618-D673B2909ED5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Presentation", "03-Presentation", "{F20449FD-5F7C-446A-B618-D673B2909ED5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Tests", "03-Tests", "{BA214978-FDD4-4F2F-BA8B-230DB9445E64}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Tests", "04-Tests", "{BA214978-FDD4-4F2F-BA8B-230DB9445E64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.iOS", "02-Presentation\Mobile.iOS\Mobile.iOS.csproj", "{D78D6F0F-E754-4726-990F-1C9265A74DFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.iOS", "03-Presentation\Mobile.iOS\Mobile.iOS.csproj", "{D78D6F0F-E754-4726-990F-1C9265A74DFA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Svg", "02-Presentation\Mobile.Svg\Mobile.Svg.csproj", "{CA869354-833D-4806-91AC-8CF59C172A86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Svg", "03-Presentation\Mobile.Svg\Mobile.Svg.csproj", "{CA869354-833D-4806-91AC-8CF59C172A86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Conductor.Tests.iOS", "03-Tests\Mobile.Conductor.Tests.iOS\Mobile.Conductor.Tests.iOS.csproj", "{4429AA89-5F80-4677-AC09-59FE2270457B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Conductor.Tests.iOS", "04-Tests\Mobile.Conductor.Tests.iOS\Mobile.Conductor.Tests.iOS.csproj", "{4429AA89-5F80-4677-AC09-59FE2270457B}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mobile.Conductors.Tests.Shared", "03-Tests\Mobile.Conductors.Tests.Shared\Mobile.Conductors.Tests.Shared.shproj", "{9C80C895-AC43-4C1D-8F83-BEDFAF6CA657}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mobile.Conductors.Tests.Shared", "04-Tests\Mobile.Conductors.Tests.Shared\Mobile.Conductors.Tests.Shared.shproj", "{9C80C895-AC43-4C1D-8F83-BEDFAF6CA657}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mobile.Presentation.Shared", "03-Presentation\Mobile.Presentation.Shared\Mobile.Presentation.Shared.shproj", "{C3E871E0-77C0-4EEE-A002-42C764D94E75}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mobile.Presentation.Shared", "02-Presentation\Mobile.Presentation.Shared\Mobile.Presentation.Shared.shproj", "{C3E871E0-77C0-4EEE-A002-42C764D94E75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.ViewModels", "01-Business\Mobile.ViewModels\Mobile.ViewModels.csproj", "{47998622-D2A8-4682-A4C9-138A4D4E270E}"
 EndProject

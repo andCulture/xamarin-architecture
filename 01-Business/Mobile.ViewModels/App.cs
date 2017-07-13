@@ -1,14 +1,13 @@
+using System.Reflection;
 using Acr.UserDialogs;
+using AutoMapper;
+using Mobile.Services.Realm;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
-using Mobile.Services.Realm;
-using AutoMapper;
-using Mobile.Core.Interfaces.Services.Database;
-using System.Reflection;
 
 namespace Mobile.ViewModels
 {
-	public class App : MvvmCross.Core.ViewModels.MvxApplication
+    public class App : MvvmCross.Core.ViewModels.MvxApplication
 	{
 		public override void Initialize()
 		{
