@@ -19,13 +19,12 @@ namespace Mobile.Services.Realm
 
 		public override void Delete(string id, bool isSoft = true)
 		{
-			var user = _repository.Query<User>(id);
-            _repository.Remove<User>(user, isSoft);
+            Delete<User>(id, isSoft);
 		}
 
 		public override void DeleteAll(bool isSoft = true)
 		{
-			_repository.RemoveAll<User>(isSoft);
+			DeleteAll<User>();
 		}
 
 		public override IQueryable<IEntityBase> GetAll(bool includeDeleted = false)
@@ -35,14 +34,12 @@ namespace Mobile.Services.Realm
 
         public override IEntityBase GetById(string id)
 		{
-            var realmUser = _repository.Query<User>(id);
-            return _mappingEngine.Map<Core.Models.User>(realmUser);
+            return GetById<User, Core.Models.User>(id);
         }
 
 		public override void Save(IEntityBase entity)
 		{
-			var realmUser = _mappingEngine.Map<User>(entity);
-            _repository.AddOrUpdate(realmUser);
+			Save<User>(entity);
 		}
 
 		#endregion ServiceBase Implementation
