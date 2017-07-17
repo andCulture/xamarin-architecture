@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using Foundation;
 using UIKit;
 using MonoTouch.NUnit.UI;
-using Mobile.Presentation.Shared.ApplicationObjects;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Core.ViewModels;
 
 namespace Mobile.Conductor.Tests.iOS
 {
@@ -31,10 +32,6 @@ namespace Mobile.Conductor.Tests.iOS
             // create a new window instance based on the screen size
             window = new UIWindow(UIScreen.MainScreen.Bounds);
             runner = new TouchRunner(window);
-
-			// Initialize Automapper
-			var setup = new AppSetup();
-			setup.InitObjectMapping();
 
             // register every tests included in the main application/assembly
             runner.Add(System.Reflection.Assembly.GetExecutingAssembly());

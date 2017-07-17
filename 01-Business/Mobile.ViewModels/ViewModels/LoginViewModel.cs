@@ -121,6 +121,7 @@ namespace Mobile.ViewModels.ViewModels
                 var user = _userService.GetByEmail(Username);
                 if(user == null)
                 {
+                    AddLoginError();
                     _userDialog.Alert("Error", "Login Failed!");
                     return;
                 }
@@ -130,11 +131,7 @@ namespace Mobile.ViewModels.ViewModels
 			catch(Exception ex)
             {
                 // TODO: Implement logging service
-                Errors.Add(new Error {
-                    ErrorType = Core.Enumerations.ErrorType.Error,
-                    Key = "LoginUser",
-                    Message = $"Unable to find a user with the email {Username}."
-                });
+                AddLoginError();
             }
         }
 
@@ -175,6 +172,16 @@ namespace Mobile.ViewModels.ViewModels
             var updatedUser = _userService.GetByEmail(featuredUser.Email);
 
             Message = $"Join the {users.Count.ToString()} users! Take it from {updatedUser.FirstName} {updatedUser.LastName} 'I love this app!'";
+        }
+
+        void AddLoginError()
+        {
+			Errors.Add(new Error
+			{
+				ErrorType = Core.Enumerations.ErrorType.Error,
+				Key = "LoginUser",
+				Message = $"Unable to find a user with the email {Username}."
+			});
         }
 
 		#endregion Private Methods

@@ -6,8 +6,8 @@
     <ProjectGuid>{4429AA89-5F80-4677-AC09-59FE2270457B}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Mobile.Conductor.Tests.iOS</RootNamespace>
-    <AssemblyName>Mobile.Conductor.Tests.iOS</AssemblyName>
+    <RootNamespace>Mobile.ViewModels.Tests.iOS</RootNamespace>
+    <AssemblyName>Mobile.ViewModels.Tests.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
@@ -94,23 +94,65 @@
       <HintPath>..\..\packages\Realm.DataBinding.1.1.0\lib\Xamarin.iOS10\Realm.DataBinding.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="AutoMapper">
-      <HintPath>..\..\packages\AutoMapper.6.0.2\lib\netstandard1.3\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.4.6.0\lib\netstandard1.1\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Realm">
-      <HintPath>..\..\packages\Realm.Database.1.4.0\lib\netstandard1.4\Realm.dll</HintPath>
-    </Reference>
-    <Reference Include="Realm.Sync">
-      <HintPath>..\..\packages\Realm.1.4.0\lib\netstandard1.4\Realm.Sync.dll</HintPath>
     </Reference>
     <Reference Include="Shouldly">
       <HintPath>..\..\packages\Shouldly.2.8.2\lib\netstandard1.3\Shouldly.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.6.1.1\lib\netstandard1.3\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.3.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Realm">
+      <HintPath>..\..\packages\Realm.Database.1.5.0\lib\netstandard1.4\Realm.dll</HintPath>
+    </Reference>
+    <Reference Include="Realm.Sync">
+      <HintPath>..\..\packages\Realm.1.5.0\lib\netstandard1.4\Realm.Sync.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform">
+      <HintPath>..\..\packages\MvvmCross.Platform.5.0.6\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform.iOS">
+      <HintPath>..\..\packages\MvvmCross.Platform.5.0.6\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Core">
+      <HintPath>..\..\packages\MvvmCross.Core.5.0.6\lib\Xamarin.iOS10\MvvmCross.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.iOS">
+      <HintPath>..\..\packages\MvvmCross.Core.5.0.6\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Binding">
+      <HintPath>..\..\packages\MvvmCross.Binding.5.0.6\lib\Xamarin.iOS10\MvvmCross.Binding.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Binding.iOS">
+      <HintPath>..\..\packages\MvvmCross.Binding.5.0.6\lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Localization">
+      <HintPath>..\..\packages\MvvmCross.Binding.5.0.6\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.Support.iOS">
+      <HintPath>..\..\packages\Acr.Support.2.1.0\lib\Xamarin.iOS10\Acr.Support.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="BTProgressHUD">
+      <HintPath>..\..\packages\BTProgressHUD.1.2.0.5\lib\Xamarin.iOS10\BTProgressHUD.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat">
+      <HintPath>..\..\packages\Splat.2.0.0\lib\Xamarin.iOS10\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs">
+      <HintPath>..\..\packages\Acr.UserDialogs.6.5.1\lib\Xamarin.iOS10\Acr.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface">
+      <HintPath>..\..\packages\Acr.UserDialogs.6.5.1\lib\Xamarin.iOS10\Acr.UserDialogs.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Test.Core">
+      <HintPath>..\..\packages\MvvmCross.Tests.5.0.6\lib\portable45-net45+win8+wp8+wpa81\MvvmCross.Test.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -131,14 +173,18 @@
       <Project>{0969D6C0-A3C3-4D2C-9D06-582E08BD1323}</Project>
       <Name>Mobile.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\02-Infrastructure\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
+    <ProjectReference Include="..\..\01-Business\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
       <Project>{711CE704-A550-48F9-8C12-6565D1E540C6}</Project>
       <Name>Mobile.Services.Realm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\01-Business\Mobile.ViewModels\Mobile.ViewModels.csproj">
+      <Project>{47998622-D2A8-4682-A4C9-138A4D4E270E}</Project>
+      <Name>Mobile.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Mobile.Conductors.Tests.Shared\Mobile.Conductors.Tests.Shared.projitems" Label="Shared" Condition="Exists('..\Mobile.Conductors.Tests.Shared\Mobile.Conductors.Tests.Shared.projitems')" />
+  <Import Project="..\Mobile.ViewModels.Tests.Shared\Mobile.ViewModels.Tests.Shared.projitems" Label="Shared" Condition="Exists('..\Mobile.ViewModels.Tests.Shared\Mobile.ViewModels.Tests.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Fody.2.0.6\build\netstandard1.4\Fody.targets" Condition="Exists('..\..\packages\Fody.2.0.6\build\netstandard1.4\Fody.targets')" />
-  <Import Project="..\..\packages\Realm.Database.1.4.0\build\Realm.Database.targets" Condition="Exists('..\..\packages\Realm.Database.1.4.0\build\Realm.Database.targets')" />
-  <Import Project="..\..\packages\Realm.1.4.0\build\Realm.targets" Condition="Exists('..\..\packages\Realm.1.4.0\build\Realm.targets')" />
+  <Import Project="..\..\packages\Realm.Database.1.5.0\build\Realm.Database.targets" Condition="Exists('..\..\packages\Realm.Database.1.5.0\build\Realm.Database.targets')" />
+  <Import Project="..\..\packages\Realm.1.5.0\build\Realm.targets" Condition="Exists('..\..\packages\Realm.1.5.0\build\Realm.targets')" />
 </Project>

@@ -56,7 +56,7 @@
       <HintPath>..\..\packages\System.ComponentModel.TypeConverter.4.3.0\lib\netstandard1.0\System.ComponentModel.TypeConverter.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper">
-      <HintPath>..\..\packages\AutoMapper.6.0.2\lib\netstandard1.1\AutoMapper.dll</HintPath>
+      <HintPath>..\..\packages\AutoMapper.6.1.1\lib\netstandard1.1\AutoMapper.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

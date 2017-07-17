@@ -1,13 +1,16 @@
-﻿using Realms;
+﻿using AutoMapper;
+using Mobile.Services.Realm;
+using MvvmCross.Test.Core;
+using Realms;
 
-namespace Mobile.Conductors.Tests
+namespace Mobile.ViewModels.Tests
 {
-	public class ConductorTestBase
+	public class ViewModelTestBase : MvxIoCSupportingTest
 	{
         #region Constants
 
         // TODO: Change this to a name that is representative of your app.
-        private const string DATABASE_NAME = "app.realm";
+        const string DATABASE_NAME = "app.realm";
 
 		#endregion Constants
 		
@@ -19,8 +22,13 @@ namespace Mobile.Conductors.Tests
 
 		#region Constructor
 
-		public ConductorTestBase()
+		public ViewModelTestBase()
 		{
+			Mapper.Initialize(cfg =>
+			{
+				cfg.CreateMap<User, Core.Models.User>();
+				cfg.CreateMap<User, Core.Models.User>().ReverseMap();
+			});
 			realmContext = Realm.GetInstance(new RealmConfiguration(DATABASE_NAME) { 
 				SchemaVersion = 1
 			});
