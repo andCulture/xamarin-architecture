@@ -104,12 +104,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="XamSvg.Ios">
-      <HintPath>..\..\packages\Softlion.XamSvg.2.3.4.4\lib\Xamarin.iOS\XamSvg.Ios.dll</HintPath>
-    </Reference>
-    <Reference Include="XamSvg.Shared">
-      <HintPath>..\..\packages\Softlion.XamSvg.2.3.4.4\lib\Xamarin.iOS\XamSvg.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="MvvmCross.Platform">
       <HintPath>..\..\packages\MvvmCross.Platform.5.0.6\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
     </Reference>
@@ -145,6 +139,12 @@
     </Reference>
     <Reference Include="Acr.UserDialogs.Interface">
       <HintPath>..\..\packages\Acr.UserDialogs.6.5.1\lib\Xamarin.iOS10\Acr.UserDialogs.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="XamSvg.Ios">
+      <HintPath>..\..\packages\Softlion.XamSvg.2.3.4.5\lib\Xamarin.iOS\XamSvg.Ios.dll</HintPath>
+    </Reference>
+    <Reference Include="XamSvg.Shared">
+      <HintPath>..\..\packages\Softlion.XamSvg.2.3.4.5\lib\Xamarin.iOS\XamSvg.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
