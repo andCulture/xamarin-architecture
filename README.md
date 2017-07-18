@@ -58,8 +58,50 @@ Includes all ViewModel test implementations. It is referenced by the platform-sp
 * [Shouldly](https://github.com/shouldly/shouldly) - Testing assertion framework
 * [XamSvg](https://components.xamarin.com/view/xamsvg) - Vector image support in iOS and Android
 
-### Setup
-##### Mac
-*Coming soon...*
-##### Windows
-*Coming soon...*
+### Steps to namespace Xamarin Architecture
+If you want to start your own app from the boilerplate solution follow the following steps to get up and running.
+1. Create a project directory for your solution (or clone a git repo you've already created).
+2. Clone the `Xamarin-Architecture` repo.
+3. Copy all the folders and files (exluding the `.git` folder) from the `Xamarin-Architecture` folder to your project's root folder.
+4. Rename `Xamarin-Architecture.sln` to match your desired namespace.
+5. Rename project folders to match your namespace
+    * 01-Core/`Mobile.Core`
+    * 01-Core/`Mobile.Services.Http`
+    * 01-Core/`Mobile.Services.Realm`
+    * 01-Core/`Mobile.ViewModels`
+    * 02-Presentation/`Mobile.Android`
+    * 02-Presentation/`Mobile.iOS`
+    * 02-Presentation/`Mobile.Svg`
+    * 03-Tests/`Mobile.ViewModels.Tests.Android`
+    * 03-Tests/`Mobile.ViewModels.Tests.iOS`
+    * 03-Tests/`Mobile.ViewModels.Tests.Shared`
+6. Rename project files (`.csproj`)
+    * 01-Core/Mobile.Core/`Mobile.Core.csproj`
+    * 01-Core/Mobile.Services.Http/`Mobile.Services.Http.csproj`
+    * 01-Core/Mobile.Services.Realm/`Mobile.Services.Realm.csproj`
+    * 01-Core/Mobile.ViewModels/`Mobile.ViewModels.csproj`
+    * 02-Presentation//Mobile.Android/`Mobile.Android.csproj`
+    * 02-Presentation/Mobile.iOS/`Mobile.iOS.csproj`
+    * 02-Presentation/Mobile.Svg/`Mobile.Svg.csproj`
+    * 03-Tests/Mobile.ViewModels.Tests.Android/`Mobile.ViewModels.Tests.Android.csproj`
+    * 03-Tests/Mobile.ViewModels.Tests.iOS/`Mobile.ViewModels.Tests.iOS.csproj`
+    * 03-Tests/Mobile.ViewModels.Tests.Shared/`Mobile.ViewModels.Tests.Shared.shproj`
+    * 03-Tests/Mobile.ViewModels.Tests.Shared/`Mobile.ViewModels.Tests.Shared.projitems`
+7. Edit all of the project files in a text editor and update:
+    * The root namespace: `<RootNamespace></RootNamespace>` 
+    * The assembly name: `<AssemblyName></AssemblyName>`
+    * Project references (when applicable): `<ProjectReference></ProjectReference>`
+8. Edit all the project paths in the solution file (`.sln`).
+9. Open the solution in `Visual Studio`.
+10. Edit the `info.plist` file in the iOS presentation project.
+    * Change the `Application Name`
+    * Change the `Bundle Identifier`
+11. Change the value for the `<string name="app_name"></string>` element in the `Strings.xml` file in the Android presentation project (located at Resources/values).
+12. Open the `AndroidManifest.xml` file in the Android presentation project and change the value for `Package name`.
+13. Repeat step `10` for the iOS test runner project.
+14. Repeat steps `11` and `12` for the Android test runner project.
+15. Update the namespaces for **all** classes in **all** projects. Note: This can be made simpler by doing a find and replace in all solution files. For example you can do a find on "`namespace Mobile.Core.`", and replace with '`namespace [YourNameSpace].Core.`". _OR_ if you're just prepending a value to the root namespace you can do a find on "`namespace Mobile.`" and replace with "`namespace YouNameSpace.Mobile.`".
+16. Update all the `using` statements in **all** classes in **all** projects. Note: This can be made simpler by doing a find and replace in all solution files. For example you can do a find on "`using Mobile.Core.`", and replace with '`using [YourNameSpace].Core.`". _OR_ if you're just prepending a value to the root namespace you can do a find on "`using Mobile.`" and replace with "`using YouNameSpace.Mobile.`".
+17. Open the `App.cs` file in the `ViewModels` core project and change `.InNamespace("Mobile.Services.Realm")` to reflect the correct namespace.
+18. Rebuild the solution & address any issues.
+19. Run the presentation and test projects to make sure everything loads properly.
