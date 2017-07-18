@@ -181,7 +181,7 @@
       <Project>{CA869354-833D-4806-91AC-8CF59C172A86}</Project>
       <Name>Mobile.Svg</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\01-Business\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
+    <ProjectReference Include="..\..\01-Core\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
       <Project>{711CE704-A550-48F9-8C12-6565D1E540C6}</Project>
       <Name>Mobile.Services.Realm</Name>
     </ProjectReference>
