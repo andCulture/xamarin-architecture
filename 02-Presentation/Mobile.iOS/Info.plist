@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleName</key>
-	<string>C2</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.andculture.boilerplate</string>
 	<key>CFBundleShortVersionString</key>
@@ -30,5 +28,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>CFBundleName</key>
+	<string>Mobile.iOS</string>
 </dict>
 </plist>
