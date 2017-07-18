@@ -177,14 +177,6 @@
     <Folder Include="Mvx\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\01-Business\Mobile.Core\Mobile.Core.csproj">
-      <Project>{0969D6C0-A3C3-4D2C-9D06-582E08BD1323}</Project>
-      <Name>Mobile.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\01-Business\Mobile.ViewModels\Mobile.ViewModels.csproj">
-      <Project>{47998622-D2A8-4682-A4C9-138A4D4E270E}</Project>
-      <Name>Mobile.ViewModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Mobile.Svg\Mobile.Svg.csproj">
       <Project>{CA869354-833D-4806-91AC-8CF59C172A86}</Project>
       <Name>Mobile.Svg</Name>
@@ -192,6 +184,14 @@
     <ProjectReference Include="..\..\01-Business\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
       <Project>{711CE704-A550-48F9-8C12-6565D1E540C6}</Project>
       <Name>Mobile.Services.Realm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\01-Core\Mobile.Core\Mobile.Core.csproj">
+      <Project>{0969D6C0-A3C3-4D2C-9D06-582E08BD1323}</Project>
+      <Name>Mobile.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\01-Core\Mobile.ViewModels\Mobile.ViewModels.csproj">
+      <Project>{47998622-D2A8-4682-A4C9-138A4D4E270E}</Project>
+      <Name>Mobile.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

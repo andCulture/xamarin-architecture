@@ -1,13 +1,13 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Business", "01-Business", "{65679265-7047-4B77-B356-FAD37D1A4F35}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Core", "01-Core", "{65679265-7047-4B77-B356-FAD37D1A4F35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Core", "01-Business\Mobile.Core\Mobile.Core.csproj", "{0969D6C0-A3C3-4D2C-9D06-582E08BD1323}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Core", "01-Core\Mobile.Core\Mobile.Core.csproj", "{0969D6C0-A3C3-4D2C-9D06-582E08BD1323}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Services.Realm", "01-Business\Mobile.Services.Realm\Mobile.Services.Realm.csproj", "{711CE704-A550-48F9-8C12-6565D1E540C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Services.Realm", "01-Core\Mobile.Services.Realm\Mobile.Services.Realm.csproj", "{711CE704-A550-48F9-8C12-6565D1E540C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Services.Http", "01-Business\Mobile.Services.Http\Mobile.Services.Http.csproj", "{B907FBA8-CABF-43B4-A8F9-0D1006E51F47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Services.Http", "01-Core\Mobile.Services.Http\Mobile.Services.Http.csproj", "{B907FBA8-CABF-43B4-A8F9-0D1006E51F47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Presentation", "02-Presentation", "{F20449FD-5F7C-446A-B618-D673B2909ED5}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.Svg", "02-Presentati
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mobile.ViewModels.Tests.Shared", "03-Tests\Mobile.ViewModels.Tests.Shared\Mobile.ViewModels.Tests.Shared.shproj", "{9C80C895-AC43-4C1D-8F83-BEDFAF6CA657}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.ViewModels", "01-Business\Mobile.ViewModels\Mobile.ViewModels.csproj", "{47998622-D2A8-4682-A4C9-138A4D4E270E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.ViewModels", "01-Core\Mobile.ViewModels\Mobile.ViewModels.csproj", "{47998622-D2A8-4682-A4C9-138A4D4E270E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile.ViewModels.Tests.iOS", "03-Tests\Mobile.ViewModels.Tests.iOS\Mobile.ViewModels.Tests.iOS.csproj", "{4429AA89-5F80-4677-AC09-59FE2270457B}"
 EndProject

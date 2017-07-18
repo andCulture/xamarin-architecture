@@ -31,7 +31,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\01-Business\Mobile.Core\Mobile.Core.csproj">
+    <ProjectReference Include="..\Mobile.Core\Mobile.Core.csproj">
       <Project>{0969D6C0-A3C3-4D2C-9D06-582E08BD1323}</Project>
       <Name>Mobile.Core</Name>
     </ProjectReference>
