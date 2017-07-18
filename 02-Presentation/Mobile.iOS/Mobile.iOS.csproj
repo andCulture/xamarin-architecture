@@ -210,7 +210,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\02-Infrastructure\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
+    <ProjectReference Include="..\..\01-Core\Mobile.Services.Realm\Mobile.Services.Realm.csproj">
       <Project>{711CE704-A550-48F9-8C12-6565D1E540C6}</Project>
       <Name>Mobile.Services.Realm</Name>
     </ProjectReference>
