@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Windows.Input;
 using Android.App;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.BindingContext;
-
+// NOTE: The namespace _must_ be the root namespace, otherwise MVX is not initialized properly.
 namespace Mobile.Android
 {
 	public class LinkerPleaseInclude

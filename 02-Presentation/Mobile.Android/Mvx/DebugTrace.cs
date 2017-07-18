@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using MvvmCross.Platform.Platform;
-
+// NOTE: The namespace _must_ be the root namespace, otherwise MVX is not initialized properly.
 namespace Mobile.Android
 {
     public class DebugTrace : IMvxTrace

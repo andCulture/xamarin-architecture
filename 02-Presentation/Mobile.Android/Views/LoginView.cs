@@ -1,37 +1,24 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using Acr.UserDialogs;
+﻿using Acr.UserDialogs;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Mobile.Svg;
-using MvvmCross.Droid.Views;
-using XamSvg;
+using Mobile.ViewModels.ViewModels;
 
 namespace Mobile.Android.Views
 {
     [Activity(Label = "Login", MainLauncher = true)]
-    public class LoginView : MvxActivity
+    public class LoginView : BaseView
     {
         protected override void OnCreate(Bundle bundle)
         {
-			// Setup SVG Lib
-			XamSvg.Setup.InitSvgLib();
-			// Config XamSvg which assembly to search for svg when "res:" is used
-			XamSvg.Shared.Config.ResourceAssembly = typeof(SVGImages).GetTypeInfo().Assembly;
-            UserDialogs.Init(this);
+			// Create your application here
+			UserDialogs.Init(this);
             base.OnCreate(bundle);
         }
 
 		protected override void OnViewModelSet()
 		{
+			var vm = (LoginViewModel)ViewModel;
+			vm.Initialize();
 			SetContentView(Resource.Layout.LoginLayout);
 		}
     }
