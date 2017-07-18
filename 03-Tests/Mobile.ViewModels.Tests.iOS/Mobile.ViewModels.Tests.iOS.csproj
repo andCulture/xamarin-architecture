@@ -94,9 +94,6 @@
       <HintPath>..\..\packages\Realm.DataBinding.1.1.0\lib\Xamarin.iOS10\Realm.DataBinding.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Autofac">
-      <HintPath>..\..\packages\Autofac.4.6.0\lib\netstandard1.1\Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="Shouldly">
       <HintPath>..\..\packages\Shouldly.2.8.2\lib\netstandard1.3\Shouldly.dll</HintPath>
     </Reference>
