@@ -39,7 +39,6 @@ namespace Mobile.ViewModels.ViewModels
         public override Task Initialize()
         {
             LoadData();
-            //TODO: Add starting logic here
             return base.Initialize();
         }
 
@@ -51,9 +50,7 @@ namespace Mobile.ViewModels.ViewModels
 
         public IMvxCommand LoginCommand => new MvxCommand(LoginUser);
 
-        public MvxColor TextColor => AppColors.Primary;
-
-		public string Message
+        public string Message
 		{
 			get
 			{

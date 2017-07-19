@@ -1,5 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Windows.Input;
+using CoreAnimation;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
@@ -23,6 +24,8 @@ namespace Mobile.iOS.Mvx
         {
             uiButton.TouchUpInside += (s, e) =>
                                       uiButton.SetTitle(uiButton.Title(UIControlState.Normal), UIControlState.Normal);
+            uiButton.BackgroundColor = uiButton.BackgroundColor;
+            uiButton.TitleLabel.TextColor = uiButton.TitleLabel.TextColor;
         }
 
         public void Include(UIBarButtonItem barButton)
@@ -35,6 +38,7 @@ namespace Mobile.iOS.Mvx
         {
             textField.Text = textField.Text + "";
             textField.TextColor = textField.TextColor;
+            textField.Layer.BorderColor = textField.Layer.BorderColor;
             textField.EditingChanged += (sender, args) => { textField.Text = ""; };
         }
 
@@ -48,6 +52,7 @@ namespace Mobile.iOS.Mvx
         public void Include(UILabel label)
         {
             label.Text = label.Text + "";
+            label.TextColor = label.TextColor;
             label.AttributedText = new NSAttributedString(label.AttributedText.ToString() + "");
         }
 
@@ -95,6 +100,11 @@ namespace Mobile.iOS.Mvx
             s.Pages = s.Pages + 1;
             s.ValueChanged += (sender, args) => { s.Pages = 0; };
         }
+
+		public void Include(CALayer l)
+		{
+            l.BorderColor = l.BorderColor;
+		}
 
         public void Include(INotifyCollectionChanged changed)
         {

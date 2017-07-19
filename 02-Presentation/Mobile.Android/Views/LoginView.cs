@@ -6,7 +6,7 @@ using Mobile.ViewModels.ViewModels;
 namespace Mobile.Android.Views
 {
     [Activity(Label = "Login", MainLauncher = true)]
-    public class LoginView : BaseView
+    public partial class LoginView : BaseView
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -17,9 +17,15 @@ namespace Mobile.Android.Views
 
 		protected override void OnViewModelSet()
 		{
-			var vm = (LoginViewModel)ViewModel;
+            var vm = (LoginViewModel)ViewModel;
 			vm.Initialize();
 			SetContentView(Resource.Layout.LoginLayout);
 		}
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            ConfigureScreenControls();
+        }
     }
 }

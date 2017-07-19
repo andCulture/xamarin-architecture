@@ -160,6 +160,9 @@
     <Compile Include="Mvx\Setup.cs" />
     <Compile Include="Views\HomeView.cs" />
     <Compile Include="Bootstrap\ColorPluginBootstrap.cs" />
+    <Compile Include="Views\LoginView.presenter.cs">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

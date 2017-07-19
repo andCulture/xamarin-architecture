@@ -12,6 +12,13 @@ namespace Mobile.iOS.ViewControllers
         {
         }
 
+        private LoginViewModel VM {
+            get
+            {
+                return (LoginViewModel)this.ViewModel;
+            }
+        }
+
 		#region Overrides
 
 		/// <summary>
@@ -33,12 +40,7 @@ namespace Mobile.iOS.ViewControllers
 			base.ViewDidLoad();
 			InitializeViews();
             ConfigureLayoutConstraints();
-            var vm = (LoginViewModel)this.ViewModel;
-            if(vm == null)
-            {
-                return;
-            }
-            vm.Initialize();
+            VM.Initialize();
 		}
 
 		/// <summary>

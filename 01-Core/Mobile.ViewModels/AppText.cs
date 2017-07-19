@@ -8,6 +8,7 @@ namespace Mobile.ViewModels
         public const string LAST_NAME = "Last Name";
         public const string LOGIN = "Login";
         public const string LOGIN_SUCCESS = "Login Successful!";
+        public const string NATIVE_COLOR = "NativeColor";
         public const string PASSWORD = "Password";
         public const string USERNAME = "Username";
     }
