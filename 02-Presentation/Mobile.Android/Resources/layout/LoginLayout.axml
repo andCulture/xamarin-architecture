@@ -31,6 +31,6 @@
         android:text="Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        local:MvxBind="Text Message"
+        local:MvxBind="Text Message; TextColor TextColor, Converter=NativeColor"
         android:id="@+id/messageLabel" />
 </LinearLayout>

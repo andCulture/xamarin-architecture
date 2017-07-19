@@ -34,12 +34,14 @@ namespace Mobile.iOS.Mvx
         public void Include(UITextField textField)
         {
             textField.Text = textField.Text + "";
+            textField.TextColor = textField.TextColor;
             textField.EditingChanged += (sender, args) => { textField.Text = ""; };
         }
 
         public void Include(UITextView textView)
         {
             textView.Text = textView.Text + "";
+            textView.TextColor = textView.TextColor;
             textView.Changed += (sender, args) => { textView.Text = ""; };
         }
 

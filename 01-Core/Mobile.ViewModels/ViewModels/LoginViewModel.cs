@@ -6,6 +6,7 @@ using Mobile.Core.Interfaces.Services.Database;
 using Mobile.Core.Models;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.UI;
 
 namespace Mobile.ViewModels.ViewModels
 {
@@ -49,6 +50,8 @@ namespace Mobile.ViewModels.ViewModels
         public string LoginButtonText => AppText.LOGIN;
 
         public IMvxCommand LoginCommand => new MvxCommand(LoginUser);
+
+        public MvxColor TextColor => AppColors.Primary;
 
 		public string Message
 		{

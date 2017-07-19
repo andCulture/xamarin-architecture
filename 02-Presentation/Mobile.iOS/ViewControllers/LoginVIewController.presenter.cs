@@ -5,6 +5,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.iOS;
 using UIKit;
 using XamSvg;
+using MvvmCross.Plugins.Color.iOS;
 
 namespace Mobile.iOS.ViewControllers
 {
@@ -78,6 +79,7 @@ namespace Mobile.iOS.ViewControllers
 
         void SetupMvxBindings()
         {
+            var color = ((LoginViewModel)ViewModel).TextColor.ToNativeColor();
             var bindings = this.CreateBindingSet<LoginViewController, LoginViewModel>();
             bindings.Bind(UsernameField)
                .For(t => t.Text)
@@ -103,6 +105,10 @@ namespace Mobile.iOS.ViewControllers
 			bindings.Bind(MessageLabel)
 			   .For(l => l.Text)
 			   .To(vm => vm.Message);
+			bindings.Bind(MessageLabel)
+			   .For(t => t.TextColor)
+			   .To(vm => vm.TextColor)
+               .WithConversion("NativeColor");            
             bindings.Apply();
         }
     }
