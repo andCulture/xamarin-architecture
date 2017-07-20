@@ -35,6 +35,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="AppText.cs" />
     <Compile Include="AppColors.cs" />
+    <Compile Include="Logger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Platform">

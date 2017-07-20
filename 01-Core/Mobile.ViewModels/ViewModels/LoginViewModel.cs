@@ -7,10 +7,11 @@ using Mobile.Core.Models;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.UI;
+using Splat;
 
 namespace Mobile.ViewModels.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel, IEnableLogger
     {
         #region Member Variables
 
@@ -38,6 +39,7 @@ namespace Mobile.ViewModels.ViewModels
 
         public override Task Initialize()
         {
+            this.Log().Info("================ In LoginViewModel Initialize.");
             LoadData();
             return base.Initialize();
         }

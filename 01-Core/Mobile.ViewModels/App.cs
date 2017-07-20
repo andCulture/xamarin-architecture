@@ -4,6 +4,7 @@ using AutoMapper;
 using Mobile.Services.Realm;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
+using Splat;
 
 namespace Mobile.ViewModels
 {
@@ -26,6 +27,7 @@ namespace Mobile.ViewModels
 
 			// Register Dialogs
 			Mvx.RegisterSingleton<IUserDialogs>(() => UserDialogs.Instance);
+			Locator.CurrentMutable.RegisterConstant(new Logger(), typeof(ILogger));
 
 			// Register  
 			RegisterAppStart<ViewModels.LoginViewModel>();
