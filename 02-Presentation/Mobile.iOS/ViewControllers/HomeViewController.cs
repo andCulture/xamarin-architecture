@@ -3,8 +3,14 @@ using Mobile.ViewModels.ViewModels;
 
 namespace Mobile.iOS.ViewControllers
 {
-    public partial class HomeViewController : BaseScrollViewController<HomeViewModel>
+    public partial class HomeViewController : BaseViewController<HomeViewModel>
     {
+        private HomeViewModel _viewModel;
+
+		public HomeViewModel VM
+		{
+			get { return _viewModel ?? (_viewModel = ViewModel as HomeViewModel); }
+		}
         public HomeViewController()
         {
         }

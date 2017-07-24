@@ -11,5 +11,6 @@ namespace Mobile.ViewModels
         public const string NATIVE_COLOR = "NativeColor";
         public const string PASSWORD = "Password";
         public const string USERNAME = "Username";
+        public const string USERS_LIST = "Users";
     }
 }

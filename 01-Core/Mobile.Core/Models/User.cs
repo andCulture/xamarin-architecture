@@ -15,5 +15,7 @@ namespace Mobile.Core.Models
         public string           Id          { get; set; }
         public string           UpdatedBy   { get; set; }
         public DateTimeOffset?  UpdatedOn   { get; set; }
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

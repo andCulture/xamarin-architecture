@@ -36,6 +36,7 @@
     <Compile Include="AppText.cs" />
     <Compile Include="AppColors.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="AppSizes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Splat">

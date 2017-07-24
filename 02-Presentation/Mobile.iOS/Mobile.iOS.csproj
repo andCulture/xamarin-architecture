@@ -170,6 +170,7 @@
     <Folder Include="Views\" />
     <Folder Include="Storyboards\" />
     <Folder Include="Mvx\" />
+    <Folder Include="Views\Cells\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Storyboards\LaunchScreen.storyboard" />
@@ -215,6 +216,14 @@
       <DependentUpon>HomeViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Bootstrap\ColorPluginBootstrap.cs" />
+    <Compile Include="TableSources\UsersTableSource.cs" />
+    <Compile Include="Views\Cells\UserCell.cs" />
+    <Compile Include="Views\Cells\UserCell.presenter.cs">
+      <DependentUpon>UserCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cells\UserCell.layout.cs">
+      <DependentUpon>UserCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\01-Core\Mobile.Services.Realm\Mobile.Services.Realm.csproj">

@@ -1,4 +1,5 @@
 ﻿using Mobile.iOS.Extensions;
+using Mobile.iOS.TableSources;
 using Mobile.iOS.Utilities;
 using Mobile.ViewModels.ViewModels;
 using MvvmCross.Binding.BindingContext;
@@ -13,14 +14,9 @@ namespace Mobile.iOS.ViewControllers
 
         #region Views
 
-		UILabel EmailLabel { get; set; }
-		UILabel EmailValue { get; set; }
-        UILabel FirstNameLabel { get; set; }
-        UILabel FirstNameValue { get; set; }
-        UILabel LastNameLabel { get; set; }
-        UILabel LastNameValue { get; set; }
-		UILabel TitleLabel { get; set; }
-
+		UsersTableSource TableSource { get; set; }
+        UITableView UsersTable { get; set; }
+		
         #endregion Views
 
         #endregion Properties
@@ -30,60 +26,32 @@ namespace Mobile.iOS.ViewControllers
         /// </summary>
         void InitializeViews()
         {
-            ContentView.Superview.BackgroundColor = AppColors.WHITE.ToUIColor();
-            ContentView.BackgroundColor = AppColors.WHITE.ToUIColor();
+            View.BackgroundColor = AppColors.WHITE.ToUIColor();
 
-            EmailLabel = GetLabel();
-            EmailValue = GetLabel();
-            FirstNameLabel = GetLabel();
-            FirstNameValue = GetLabel();
-            LastNameLabel = GetLabel();
-            LastNameValue = GetLabel();
-            TitleLabel = GetLabel();
+            UsersTable = new UITableView
+            {
+                RowHeight = 70f,
+                SeparatorStyle = UITableViewCellSeparatorStyle.SingleLine,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            TableSource = new UsersTableSource(VM.Users, UsersTable);
+            UsersTable.Source = TableSource;
             // Add the subviews to the content view.
-            ContentView.AddSubviews(EmailLabel, EmailValue, FirstNameLabel, FirstNameValue, LastNameLabel, LastNameValue, TitleLabel);
+            View.AddSubviews(UsersTable);
             SetupMvxBindings();
+            UsersTable.ReloadData();
         }
 
         void SetupMvxBindings()
         {
             var bindings = this.CreateBindingSet<HomeViewController, HomeViewModel>();
-            bindings.Bind(EmailLabel)
-               .For(l => l.Text)
-               .To(vm => vm.EmailLabelText)
-               .OneTime();
-            bindings.Bind(EmailValue)
-               .For(l => l.Text)
-               .To(vm => vm.User.Email);
-			bindings.Bind(FirstNameLabel)
-			   .For(l => l.Text)
-			   .To(vm => vm.FirstNameLabelText)
-			   .OneTime();
-			bindings.Bind(FirstNameValue)
-			   .For(l => l.Text)
-			   .To(vm => vm.User.FirstName);
-			bindings.Bind(LastNameLabel)
-			   .For(l => l.Text)
-			   .To(vm => vm.LastNameLabelText)
-			   .OneTime();
-			bindings.Bind(LastNameValue)
-			   .For(l => l.Text)
-			   .To(vm => vm.User.LastName);
-			bindings.Bind(TitleLabel)
-			  .For(l => l.Text)
-			  .To(vm => vm.TitleLabelText)
-			  .OneTime();           
+            bindings.Bind(TableSource)
+                    .To(vm => vm.Users);
+			bindings.Bind(this)
+					.For(v => v.Title)
+					.To(vm => vm.TitleText)
+					.OneTime();
             bindings.Apply();
-        }
-
-        UILabel GetLabel()
-        {
-            return new UILabel
-            {
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                Lines = 0,
-                LineBreakMode = UILineBreakMode.WordWrap
-            };
         }
     }
 }

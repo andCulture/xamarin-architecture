@@ -1,30 +1,39 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Acr.UserDialogs;
+using Mobile.Core.Interfaces.Services.Database;
 using Mobile.Core.Models;
 using MvvmCross.Core.ViewModels;
 
 namespace Mobile.ViewModels.ViewModels
 {
-    public class HomeViewModel : BaseViewModel, IMvxViewModel<User>
+    public class HomeViewModel : BaseViewModel, IMvxViewModel
     {
         #region Member Variables
 
-        User _user;
+        readonly IUserDialogs _userDialog;
+        List<User> _users;
+        readonly IUserService _userService;
 
 		#endregion Member Variables
 
 		#region Constructors
 
-		public HomeViewModel() : base()
+		public HomeViewModel(IUserService userService, IUserDialogs userDialog) : base()
         {
+			_userDialog = userDialog;
+			_userService = userService;
         }
 
 		#endregion Constructors
 
 		#region Overrides
 		
-        public Task Initialize(User parameter)
+        public Task Initialize()
 		{
-            User = parameter;
+            // Get all users
+            LoadData();
 			return base.Initialize();
 		}
 
@@ -32,25 +41,19 @@ namespace Mobile.ViewModels.ViewModels
 
         #region Public Properties
 
-		public string EmailLabelText => AppText.EMAIL;
-
-        public string FirstNameLabelText => AppText.FIRST_NAME;
-
-        public string LastNameLabelText => AppText.LAST_NAME;
-
-		public User User
+		public List<User> Users
 		{
 			get
 			{
-				return _user;
+				return _users;
 			}
 			set
 			{
-				SetProperty(ref _user, value);
+				SetProperty(ref _users, value);
 			}
 		}
 
-        public string TitleLabelText => AppText.LOGIN_SUCCESS;
+        public string TitleText => AppText.USERS_LIST;
 
 		#endregion Public Properties
 
@@ -59,6 +62,19 @@ namespace Mobile.ViewModels.ViewModels
 		#endregion Public Methods
 
 		#region Private Methods
+
+		async Task LoadData()
+		{
+			_userDialog.ShowLoading("Loading Users...", MaskType.Black);
+			await Task.Factory.StartNew(GetUsers);
+			_userDialog.HideLoading();
+		}
+
+        void GetUsers()
+        {
+			// Get all the users we just saved to ensure they are persisited in the database. 
+			Users = _userService.GetAll().ToList();
+        }
 
         #endregion Private Methods
     }

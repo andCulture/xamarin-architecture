@@ -128,7 +128,7 @@ namespace Mobile.ViewModels.ViewModels
                     return;
                 }
                 // Navigate to the home view model.
-                _navigationService.Navigate<HomeViewModel, User>(user);
+                _navigationService.Navigate<HomeViewModel>();
             }
 			catch(Exception ex)
             {
